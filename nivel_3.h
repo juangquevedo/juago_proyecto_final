@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QTimer>
 #include <QFile>
 #include <QKeyEvent>
@@ -32,6 +33,8 @@ private slots:
 
 private:
     Ui::Nivel_3 *ui;
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    QGraphicsView * view = new QGraphicsView(this);
 };
 
 #endif // NIVEL_3_H

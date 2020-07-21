@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QTimer>
 #include <QFile>
 #include <QKeyEvent>
@@ -15,6 +16,8 @@
 #include <stdio.h>
 #include <time.h>
 
+#include <personaje.h>
+
 namespace Ui {
 class Nivel_1;
 }
@@ -26,14 +29,16 @@ class Nivel_1 : public QMainWindow
 public:
     explicit Nivel_1(QWidget *parent = nullptr);
     ~Nivel_1();
+    void setskin(int skin);
 
 private slots:
 
 
 private:
     Ui::Nivel_1 *ui;
-    int skin;
     QGraphicsScene *scene;
+    QGraphicsView * view;
+    personaje *player;
 };
 
 #endif // NIVEL_1_H

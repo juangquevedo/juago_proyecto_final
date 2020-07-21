@@ -33,6 +33,8 @@ private slots:
 
     void on_bot_nil_3_clicked();
 
+    void on_but_ski_3_clicked();
+
 private:
     Ui::Menu *ui;
     Nivel_1 *level1;
