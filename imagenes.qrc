@@ -5,5 +5,6 @@
         <file>Imagenes/skin_1.png</file>
         <file>Imagenes/skin_2.png</file>
         <file>Imagenes/skin_3.png</file>
+        <file>Imagenes/virus.png</file>
     </qresource>
 </RCC>

@@ -37,9 +37,12 @@ private slots:
 
 private:
     Ui::Menu *ui;
+    //carga de los niveles
     Nivel_1 *level1;
     Nivel_2 *level2;
     Nivel_3 *level3;
+
+    //variable para definir la apariencia del personaje
     int skin=0;
 };
 #endif // MENU_H

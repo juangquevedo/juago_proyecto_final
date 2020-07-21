@@ -17,6 +17,7 @@
 #include <time.h>
 
 #include <personaje.h>
+#include <enemigos.h>
 
 namespace Ui {
 class Nivel_1;
@@ -31,6 +32,7 @@ public:
     ~Nivel_1();
     void keyPressEvent(QKeyEvent * event);
     void setskin(int skin);
+    void crear_enemigos();
 
 private slots:
 
@@ -40,6 +42,8 @@ private:
     QGraphicsScene *scene;
     QGraphicsView * view;
     personaje *player;
+    QList <enemigos *> enemys;
+
 };
 
 #endif // NIVEL_1_H

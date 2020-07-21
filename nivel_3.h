@@ -17,6 +17,7 @@
 #include <time.h>
 
 #include <personaje.h>
+#include <enemigos.h>
 
 namespace Ui {
 class Nivel_3;
@@ -40,6 +41,7 @@ private:
     QGraphicsScene *scene;
     QGraphicsView * view;
     personaje *player;
+    QList <enemigos *> enemys;
 };
 
 #endif // NIVEL_3_H

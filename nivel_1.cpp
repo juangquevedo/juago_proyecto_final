@@ -12,6 +12,7 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     player= new personaje;
     player->setPos(10,10);
     scene->addItem(player);
+    crear_enemigos();
 }
 
 Nivel_1::~Nivel_1(){
@@ -40,5 +41,14 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
 
 void Nivel_1::setskin(int skin){
     player->setSkin(skin);
+}
+
+void Nivel_1::crear_enemigos(){
+    srand(time(NULL));
+    for(int i=0;i<(3+rand()%(7-3));i++){
+        enemys.push_back(new enemigos);
+        enemys.back()->setPos(10+rand()%(1991-10),10+rand()%(1991-10));
+        scene->addItem(enemys.back());
+    }
 }
 
