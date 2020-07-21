@@ -23,18 +23,20 @@ Menu::~Menu(){
 
 void Menu::on_bot_nil_1_clicked(){
     level1->setskin(skin);
-    this->close();
     level1->show();
+    this->close();
 }
 
 void Menu::on_bot_nil_2_clicked(){
-    this->close();
+    level2->setskin(skin);
     level2->show();
+    this->close();
 }
 
 void Menu::on_bot_nil_3_clicked(){
+    level2->setskin(skin);
+    level2->show();
     this->close();
-    level3->show();
 }
 
 void Menu::on_but_ski_1_clicked(){

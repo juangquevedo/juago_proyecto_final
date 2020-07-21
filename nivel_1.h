@@ -29,6 +29,7 @@ class Nivel_1 : public QMainWindow
 public:
     explicit Nivel_1(QWidget *parent = nullptr);
     ~Nivel_1();
+    void keyPressEvent(QKeyEvent * event);
     void setskin(int skin);
 
 private slots:
