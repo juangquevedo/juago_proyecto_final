@@ -41,7 +41,6 @@ void Menu::on_bot_nil_3_clicked(){
 
 void Menu::on_but_ski_1_clicked(){
     skin=1;
-    ui->label_8->setNum(skin);
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
@@ -49,7 +48,6 @@ void Menu::on_but_ski_1_clicked(){
 
 void Menu::on_but_ski_2_clicked(){
     skin=2;
-    ui->label_8->setNum(skin);
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
@@ -57,7 +55,6 @@ void Menu::on_but_ski_2_clicked(){
 
 void Menu::on_but_ski_3_clicked(){
     skin=3;
-    ui->label_8->setNum(skin);
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
