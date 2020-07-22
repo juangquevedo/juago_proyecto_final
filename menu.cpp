@@ -8,6 +8,7 @@ Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
     level2= new Nivel_2;
     level3= new Nivel_3;
 
+    //se desabilita los botones para no causar errores
     ui->bot_nil_1->setEnabled(false);
     ui->bot_nil_2->setEnabled(false);
     ui->bot_nil_3->setEnabled(false);
@@ -22,46 +23,52 @@ Menu::~Menu(){
 
 
 void Menu::on_bot_nil_1_clicked(){
-    this->close();
+    //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level1->setskin(skin);
     level1->show();
+    this->close();
 }
 
 void Menu::on_bot_nil_2_clicked(){
-    this->close();
+    //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level2->setskin(skin);
     level2->show();
+    this->close();
 }
 
-void Menu::on_pushButton_clicked(){
+void Menu::on_bot_nil_3_clicked(){
+    //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level2->setskin(skin);
+    level2->show();
     this->close();
-    level3->show();
 }
 
 void Menu::on_but_ski_1_clicked(){
+    //cambia la variable de la apariencia
     skin=1;
-    QString ban="activado ";
-    ban.push_back(char(skin+48));
-    ui->label_8->setText(ban);
+    //se habilitan los botones para cargar el nivel
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
 }
 
 void Menu::on_but_ski_2_clicked(){
+    //cambia la variable de la apariencia
     skin=2;
-    QString ban="activado ";
-    ban.push_back(char(skin+48));
-    ui->label_8->setText(ban);
+    //se habilitan los botones para cargar el nivel
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
 }
 
-void Menu::on_bot_nil_3_clicked(){
+void Menu::on_but_ski_3_clicked(){
+    //cambia la variable de la apariencia
     skin=3;
-    QString ban="activado ";
-    ban.push_back(char(skin+48));
-    ui->label_8->setText(ban);
+    //se habilitan los botones para cargar el nivel
     ui->bot_nil_1->setEnabled(true);
     ui->bot_nil_2->setEnabled(true);
     ui->bot_nil_3->setEnabled(true);
+}
+
+void Menu::on_pushButton_clicked(){
 }

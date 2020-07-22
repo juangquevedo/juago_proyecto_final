@@ -33,11 +33,16 @@ private slots:
 
     void on_bot_nil_3_clicked();
 
+    void on_but_ski_3_clicked();
+
 private:
     Ui::Menu *ui;
+    //carga de los niveles
     Nivel_1 *level1;
     Nivel_2 *level2;
     Nivel_3 *level3;
+
+    //variable para definir la apariencia del personaje
     int skin=0;
 };
 #endif // MENU_H
