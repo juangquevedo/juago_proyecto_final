@@ -35,7 +35,7 @@ public:
     void crear_enemigos();
 
 private slots:
-
+    void act_per();
 
 private:
     Ui::Nivel_1 *ui;
@@ -43,6 +43,7 @@ private:
     QGraphicsView * view;
     personaje *player;
     QList <enemigos *> enemys;
+    QTimer *time_personje;
 
 };
 

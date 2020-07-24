@@ -3,6 +3,7 @@
 
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
+#include <math.h>
 
 //manjeo de los enemigos
 class enemigos: public QGraphicsPixmapItem
@@ -12,7 +13,7 @@ public:
     enemigos();
 
     //metodos de la clase
-    void mover();
+    void mover(int px, int py);
 
     //metodos set y get
     void setVelx(double nvx);

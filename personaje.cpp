@@ -21,22 +21,32 @@ void personaje::setSkin(int skin){
     }
 }
 
-void personaje::mover_personaje(int Fx, int Fy, int cf){
-    float p=masa*9.8;;
+void personaje::mover_personaje(int Fx, int Fy, double cf){
+    double p=masa*9.8;
     fric=cf*p;
-    Fx=(p*Fx);
-    Fy=(p*Fy);
-    Ax+=(Fx-fric)/masa;
-    Ay+=(Fy-fric)/masa;
+    if(Fx!=0){
+        Ax=((Fx*p)+fric)/masa;
+    }
+    if(Fy!=0){
+        Ay=((Fy*p)+fric)/masa;
+    }
 }
 
 void personaje::actualizar(){
     double x=(this->x()),y=(this->y());
-    Vx+=Ax;
-    Vy+=Ay;
-    x+=Vx+(0.5*Ax);
-    y+=Vy+(0.5*Ay);
-    setPos(x,y);
+    Vx+=Ax*t;
+    Vy+=Ay*t;
+    x+=(Vx*t)+(0.5*Ax*pow(t,2));
+    y+=(Vy*t)+(0.5*Ay*pow(t,2));
+    this->setPos(x,y);
+    Ax+=fric/masa;
+    Ay+=fric/masa;
+    if(Vx<0){
+        Vx=0;
+        Ax=0;}
+    if(Vy<0){
+        Vy=0;
+        Ay=0;}
 }
 
 
