@@ -61,12 +61,15 @@ void Nivel_1::setskin(int skin){
 }
 
 void Nivel_1::crear_enemigos(){
-    srand(time(NULL));
+    /*srand(time(NULL));
     for(int i=0;i<(3+rand()%(7-3));i++){
         enemys.push_back(new enemigos);
         enemys.back()->setPos(10+rand()%(1991-10),10+rand()%(1991-10));
         scene->addItem(enemys.back());
-    }
+    }*/
+    enemys.push_back(new enemigos);
+    enemys.back()->setPos(1300,1000);
+    scene->addItem(enemys.back());
 }
 
 void Nivel_1::act_per(){

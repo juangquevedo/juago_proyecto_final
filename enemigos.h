@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QPixmap>
 #include <math.h>
+#include <QtDebug>
 
 //manjeo de los enemigos
 class enemigos: public QGraphicsPixmapItem
@@ -23,7 +24,7 @@ public:
 
 private:
     //atributos
-    double vx,vy;
+    double vel=0.2;
 };
 
 #endif // ENEMIGOS_H
