@@ -20,3 +20,34 @@ void personaje::setSkin(int skin){
         break;
     }
 }
+
+void personaje::mover_personaje(int Fx, int Fy, int cf){
+    float p=masa*9.8;;
+    fric=cf*p;
+    Fx=(p*Fx);
+    Fy=(p*Fy);
+    Ax+=(Fx-fric)/masa;
+    Ay+=(Fy-fric)/masa;
+}
+
+void personaje::actualizar(){
+    double x=(this->x()),y=(this->y());
+    Vx+=Ax;
+    Vy+=Ay;
+    x+=Vx+(0.5*Ax);
+    y+=Vy+(0.5*Ay);
+    setPos(x,y);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
