@@ -47,18 +47,16 @@ Nivel_1::~Nivel_1(){
 
 void Nivel_1::keyPressEvent(QKeyEvent *event){
     if(event->key() == Qt::Key_W)
-        player->setPos(player->x(),player->y()-10);
+        player->mover_personaje(0,-1,0.5);
 
     if(event->key() == Qt::Key_S)
-        player->setPos(player->x(),player->y()+10);
+        player->mover_personaje(0,1,0.5);
 
     if(event->key() == Qt::Key_A)
-        player->setPos(player->x()-10,player->y());
+        player->mover_personaje(-1,0,0.5);
 
     if(event->key() == Qt::Key_D)
-        player->setPos(player->x()+10,player->y());
-        //player->mover_personaje(1,0,-0.5);
-
+        player->mover_personaje(1,0,0.5);
 }
 
 void Nivel_1::setskin(int skin){
@@ -77,7 +75,7 @@ void Nivel_1::crear_enemigos(){
 void Nivel_1::act_per(){
     int dx,dy;
     QList <enemigos *>::iterator it=enemys.begin();
-    //player->actualizar();
+    player->actualizar();
 
     //actualizo la vista y la barra de vida para que enfoquen al jugador
     view->centerOn(player->x(),player->y());
@@ -90,10 +88,10 @@ void Nivel_1::act_per(){
         dx=abs(player->x()-(*it)->x());
         dy=abs(player->y()-(*it)->y());
         if(dx<400 && dy<300){
-            (*it)->mover(player->x(),player->y());
+            //(*it)->mover(player->x(),player->y());
             dx=sqrt(pow(player->x()+12-(*it)->x(),2)+pow(player->y()+20-(*it)->y(),2));
             if(dx<30){
-                player->setVida(player->getVida()-10);
+                //player->setVida(player->getVida()-10);
                 scene->removeItem((*it));
                 (*it)->setPos(10000,10000);
                 act_barra();
