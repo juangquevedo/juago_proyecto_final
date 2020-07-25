@@ -6,8 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //Menu w;
-    Nivel_1 w;
+    Menu w;
     w.show();
     return a.exec();
 }

@@ -31,6 +31,7 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
 
     time_personje->start(10);
 
+    //inicio de la barra de vida
     barra= new QGraphicsPixmapItem;
     barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra);
@@ -60,10 +61,12 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
 }
 
 void Nivel_1::setskin(int skin){
+    //esta funcion la llama el menu para seleccionar la apariencia del personaje
     player->setSkin(skin);
 }
 
 void Nivel_1::crear_enemigos(){
+    //se crean enemigos en una cantidad y posicion aleatoria
     srand(time(NULL));
     for(int i=0;i<(3+rand()%(7-3));i++){
         enemys.push_back(new enemigos);
@@ -73,6 +76,7 @@ void Nivel_1::crear_enemigos(){
 }
 
 void Nivel_1::act_per(){
+    //esta funcion actualiza al personaje y a los enemigos
     int dx,dy;
     QList <enemigos *>::iterator it=enemys.begin();
     player->actualizar();
@@ -82,22 +86,25 @@ void Nivel_1::act_per(){
     if((player->x()>380 && player->x()<1620))
         barra->setPos(player->x()-250,barra->y());
     if(player->y()>280 && player->y()<1720)
-        barra->setPos(barra->x(),player->y()+270);
+        barra->setPos(barra->x(),player->y()+260);
 
+    //en este ciclo se maneja el movimiento de los enemigos
     for(;it!=enemys.end();it++){
         dx=abs(player->x()-(*it)->x());
         dy=abs(player->y()-(*it)->y());
         if(dx<400 && dy<300){
-            //(*it)->mover(player->x(),player->y());
+            (*it)->mover(player->x(),player->y());
             dx=sqrt(pow(player->x()+12-(*it)->x(),2)+pow(player->y()+20-(*it)->y(),2));
             if(dx<30){
-                //player->setVida(player->getVida()-10);
+                player->setVida(player->getVida()-10);
                 scene->removeItem((*it));
                 (*it)->setPos(10000,10000);
                 act_barra();
             }
         }
     }
+
+    //este if es el que le avisa al programa que el jugador se ha quedado sin vida
     if(player->getVida()<=0){
         QMessageBox mensaje;
         mensaje.setText("Perdiste");
@@ -108,6 +115,7 @@ void Nivel_1::act_per(){
 }
 
 void Nivel_1::act_barra(){
+    //esta funcion cambia la imagen de la barra de vida dependiendo de la salud del personaje
     if(player->getVida()>=100)
         barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
     else if(player->getVida()>=90 && player->getVida()<100)

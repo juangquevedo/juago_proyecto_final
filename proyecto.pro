@@ -20,23 +20,17 @@ SOURCES += \
     main.cpp \
     menu.cpp \
     nivel_1.cpp \
-    nivel_2.cpp \
-    nivel_3.cpp \
     personaje.cpp
 
 HEADERS += \
     enemigos.h \
     menu.h \
     nivel_1.h \
-    nivel_2.h \
-    nivel_3.h \
     personaje.h
 
 FORMS += \
     menu.ui \
-    nivel_1.ui \
-    nivel_2.ui \
-    nivel_3.ui
+    nivel_1.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
