@@ -20,3 +20,11 @@ void enemigos::mover(int px, int py){
     if(r<23) setPos(this->x(),this->y()); //r<23 (this->x(),this->y())
     else setPos(this->x()+x,this->y()+y);
 }
+
+void enemigos::setVel(double nvx){
+    vel=nvx;
+}
+
+double enemigos::getVel(){
+    return vel;
+}

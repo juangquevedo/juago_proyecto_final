@@ -49,6 +49,13 @@ void personaje::actualizar(){
         Ay=0;}
 }
 
+void personaje::setVida(int nv){
+    vida=nv;
+}
+
+int personaje::getVida(){
+    return vida;
+}
 
 
 

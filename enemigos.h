@@ -17,14 +17,12 @@ public:
     void mover(int px, int py);
 
     //metodos set y get
-    void setVelx(double nvx);
-    void setVely(double nvy);
-    double getVelx();
-    double getVely();
+    void setVel(double nvx);
+    double getVel();
 
 private:
     //atributos
-    double vel=0.2;
+    double vel=0.3;
 };
 
 #endif // ENEMIGOS_H

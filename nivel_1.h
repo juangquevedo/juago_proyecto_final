@@ -10,6 +10,8 @@
 #include <QPixmap>
 #include <QDebug>
 #include <QApplication>
+#include <QGraphicsPixmapItem>
+#include <QMessageBox>
 
 #include <fstream>
 #include <stdlib.h>
@@ -33,6 +35,7 @@ public:
     void keyPressEvent(QKeyEvent * event);
     void setskin(int skin);
     void crear_enemigos();
+    void act_barra();
 
 private slots:
     void act_per();
@@ -44,6 +47,7 @@ private:
     personaje *player;
     QList <enemigos *> enemys;
     QTimer *time_personje;
+    QGraphicsPixmapItem *barra;
 
 };
 

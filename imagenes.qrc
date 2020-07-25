@@ -7,5 +7,16 @@
         <file>Imagenes/skin_3.png</file>
         <file>Imagenes/virus.png</file>
         <file>Imagenes/mapa_provisional.png</file>
+        <file>Imagenes/barra 0%.png</file>
+        <file>Imagenes/barra 10%.png</file>
+        <file>Imagenes/barra 20%.png</file>
+        <file>Imagenes/barra 30%.png</file>
+        <file>Imagenes/barra 40%.png</file>
+        <file>Imagenes/barra 50%.png</file>
+        <file>Imagenes/barra 60%.png</file>
+        <file>Imagenes/barra 70%.png</file>
+        <file>Imagenes/barra 80%.png</file>
+        <file>Imagenes/barra 90%.png</file>
+        <file>Imagenes/barra 100%.png</file>
     </qresource>
 </RCC>
