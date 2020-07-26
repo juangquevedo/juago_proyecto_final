@@ -5,8 +5,9 @@ Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
     ui->setupUi(this);
 
     level1= new Nivel_1;
-    level2= new Nivel_2;
-    level3= new Nivel_3;
+    level1->setskin(2);
+    level1->show();
+    this->close();
 
     //se desabilita los botones para no causar errores
     ui->bot_nil_1->setEnabled(false);
@@ -17,8 +18,6 @@ Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
 Menu::~Menu(){
     delete ui;
     delete level1;
-    delete level2;
-    delete level3;
 }
 
 
@@ -31,15 +30,15 @@ void Menu::on_bot_nil_1_clicked(){
 
 void Menu::on_bot_nil_2_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
-    level2->setskin(skin);
-    level2->show();
+    level1->setskin(skin);
+    level1->show();
     this->close();
 }
 
 void Menu::on_bot_nil_3_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
-    level2->setskin(skin);
-    level2->show();
+    level1->setskin(skin);
+    level1->show();
     this->close();
 }
 
@@ -61,6 +60,8 @@ void Menu::on_but_ski_2_clicked(){
     ui->bot_nil_3->setEnabled(true);
 }
 
+
+
 void Menu::on_but_ski_3_clicked(){
     //cambia la variable de la apariencia
     skin=3;
@@ -70,5 +71,3 @@ void Menu::on_but_ski_3_clicked(){
     ui->bot_nil_3->setEnabled(true);
 }
 
-void Menu::on_pushButton_clicked(){
-}

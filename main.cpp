@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "nivel_1.h"
 
 #include <QApplication>
 
