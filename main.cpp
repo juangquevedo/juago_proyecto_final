@@ -1,12 +1,12 @@
 #include "menu.h"
-#include "nivel_1.h"
+#include "menu_2_jugadores.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Menu w;
+    menu_2_jugadores w;
     w.show();
     return a.exec();
 }

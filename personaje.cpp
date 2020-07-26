@@ -28,13 +28,13 @@ void personaje::mover_personaje(int Fx, int Fy, double cf){
     double p=masa*9.8;
     fric=cf*p;
     if(Fx<0)
-        Ax=((Fx*p*100)+fric)/masa;
+        Ax=((Fx*p*50)+fric)/masa;
     else if (Fx>0)
-        Ax=((Fx*p*100)-fric)/masa;
+        Ax=((Fx*p*50)-fric)/masa;
     if(Fy<0)
-        Ay=((Fy*p*100)+fric)/masa;
+        Ay=((Fy*p*50)+fric)/masa;
     if(Fy>0)
-        Ay=((Fy*p*100)-fric)/masa;
+        Ay=((Fy*p*50)-fric)/masa;
 }
 
 void personaje::actualizar(){

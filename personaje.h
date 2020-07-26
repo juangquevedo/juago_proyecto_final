@@ -20,7 +20,7 @@ public:
 private:
     //estas son las caracteristicas del personaje
     double t=0.03;
-    double Vx=0,Vy=0,vel=5;
+    double Vx=0,Vy=0,vel=10;
     double Ax=0,Ay=0;
     double fric;
     double masa=75;

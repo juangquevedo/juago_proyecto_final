@@ -19,17 +19,20 @@ SOURCES += \
     enemigos.cpp \
     main.cpp \
     menu.cpp \
+    menu_2_jugadores.cpp \
     nivel_1.cpp \
     personaje.cpp
 
 HEADERS += \
     enemigos.h \
     menu.h \
+    menu_2_jugadores.h \
     nivel_1.h \
     personaje.h
 
 FORMS += \
     menu.ui \
+    menu_2_jugadores.ui \
     nivel_1.ui
 
 # Default rules for deployment.

@@ -18,5 +18,6 @@
         <file>Imagenes/barra 80%.png</file>
         <file>Imagenes/barra 90%.png</file>
         <file>Imagenes/barra 100%.png</file>
+        <file>Imagenes/mapa pokemon.jpg</file>
     </qresource>
 </RCC>
