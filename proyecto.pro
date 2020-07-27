@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     enemigos.cpp \
+    items.cpp \
     main.cpp \
     menu.cpp \
     menu_2_jugadores.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     enemigos.h \
+    items.h \
     menu.h \
     menu_2_jugadores.h \
     nivel_1.h \

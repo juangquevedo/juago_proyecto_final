@@ -22,7 +22,7 @@ public:
 
 private:
     //atributos
-    double vel=0.3;
+    double vel=0.5;
 };
 
 #endif // ENEMIGOS_H
