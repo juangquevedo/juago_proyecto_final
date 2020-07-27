@@ -10,13 +10,13 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     scene->setSceneRect(0,0,xmap,ymap);
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
     view->setScene(scene);
-    view->resize(800,600);
-    this->resize(800,600);
+    view->resize(xvi,yvi);
+    this->resize(xvi,yvi);
 
     //inicio del personaje
     jugadores=1;
     player= new personaje;
-    player->setPos(750,750);
+    player->setPos(1960,1106);
     scene->addItem(player);
     view->centerOn(player->x(),player->y());
 
@@ -47,28 +47,45 @@ Nivel_1::~Nivel_1(){
 }
 
 void Nivel_1::nivel_2(){
-    player->setPos(10,10);
+    //cambios para que el nivel concuerde con la ecena y suba la dificultad
+    player->setPos(20,30);
     xmap=1182;
     ymap=321;
+    yvi=ymap;
+    fric=0.7;
+    view->resize(xvi,yvi+20);
+    this->resize(xvi,yvi+20);
     scene->setSceneRect(0,0,xmap,ymap);
     scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Imagenes/mapa edificio.png").scaled(xmap,ymap)));
+    barra->setPos(100,yvi-30);
+}
+
+void Nivel_1::nivel_3(){
+    //cambios para que el nivel concuerde con la ecena y suba la dificultad
+    player->setPos(371,187);
     enemi+=5;
 }
 
 void Nivel_1::keyPressEvent(QKeyEvent *event){
+    //movimiento para cuando hay 1 jugador
     if(jugadores==1){
         if(event->key() == Qt::Key_W)
             player->mover_personaje(0,-1,fric);
+            //player->setPos(player->x(),player->y()-10);
 
         if(event->key() == Qt::Key_S)
             player->mover_personaje(0,1,fric);
+            //player->setPos(player->x(),player->y()+10);
 
         if(event->key() == Qt::Key_A)
             player->mover_personaje(-1,0,fric);
+            //player->setPos(player->x()-10,player->y());
 
         if(event->key() == Qt::Key_D)
             player->mover_personaje(1,0,fric);
+            //player->setPos(player->x()+10,player->y());
     }
+    //movimiento para cuando hay 2 jugadores
     else{
         if(event->key() == Qt::Key_W)
             player->mover_personaje(0,-1,fric);
@@ -94,9 +111,17 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
         if(event->key() == Qt::Key_L)
             player_2->mover_personaje(1,0,fric);
     }
+    //este es temporal para saber las ubicaciones de las paredes
+//    if(event->key() == Qt::Key_P){
+//        QMessageBox mensaje;
+//        QString b="X: "+int2str(player->x())+"Y: "+int2str(player->y());
+//        mensaje.setText(b);
+//        mensaje.exec();
+//    }
 }
 
 void Nivel_1::dos_jugadores(int skin_2){
+    //essta funcion crea al jugador 2 y su barra de vida
     jugadores=2;
     player_2= new personaje;
     player_2->setSkin(skin_2);
@@ -108,10 +133,12 @@ void Nivel_1::dos_jugadores(int skin_2){
     scene->addItem(barra_p2);
     barra_p2->setPos(player->x()-250,player->y()-270);
 
+    //aumenta los enemigos al doble
     enemi*=2;
     //inicio de enemigos
     crear_enemigos();
     crear_items();
+    //inicio los timers ahora para que si se reflejen los cambios del nivel
     time_personje->start(10);
     time_items->start(10);
 }
@@ -119,9 +146,10 @@ void Nivel_1::dos_jugadores(int skin_2){
 void Nivel_1::setskin(int skin){
     //esta funcion la llama el menu para seleccionar la apariencia del personaje
     player->setSkin(skin);
-    //inicio de enemigos
+    //inicio de enemigos e items
     crear_enemigos();
     crear_items();
+    //inicio los timers ahora para que si se reflejen los cambios del nivel
     time_personje->start(10);
     time_items->start(10);
 }
@@ -131,7 +159,7 @@ void Nivel_1::crear_enemigos(){
     srand(time(NULL));
     for(int i=0;i<enemi;i++){
         enemys.push_back(new enemigos);
-        enemys.back()->setPos(10+rand()%(xmap-9),10+rand()%(ymap-9));
+        enemys.back()->setPos(10+rand()%((xmap-30)-9),10+rand()%((ymap-30)-9));
         scene->addItem(enemys.back());
     }
 }
@@ -141,7 +169,7 @@ void Nivel_1::crear_items(){
     srand(time(NULL));
     for(int i=0;i<enemi/2;i++){
         itemss.push_back(new items);
-        itemss.back()->setPos(10+rand()%(xmap-9),10+rand()%(ymap-9));
+        itemss.back()->setPos(10+rand()%((xmap-20)-9),10+rand()%((ymap-20)-9));
         scene->addItem(itemss.back());
     }
 }
@@ -150,24 +178,24 @@ void Nivel_1::act_per(){
     //esta funcion actualiza al personaje y a los enemigos
     int dx=player->x(),dy=player->y();
     QList <enemigos *>::iterator it=enemys.begin();
-    player->actualizar();
+    player->actualizar(xmap,ymap);
     if(jugadores==2){
-        player_2->actualizar();
+        player_2->actualizar(xmap,ymap);
         dx=(abs(player->x())+abs(player_2->x()))/2;
         dy=(abs(player->y())+abs(player_2->y()))/2;
     }
     //actualizo la vista y la barra de vida para que enfoquen al jugador o los jugadores
     view->centerOn(dx,dy);
     if((dx>380 && dx<xmap-380)){
-        barra->setPos(dx-250,barra->y());
-        if(jugadores==2) barra_p2->setPos(dx-250,barra->y());
+        barra->setPos(dx-200,barra->y());
+        if(jugadores==2) barra_p2->setPos(dx-(xvi/2),barra->y());
     }
     if(dy>280 && dy<ymap-280){
-        barra->setPos(barra->x(),dy+260);
-        if(jugadores==2) barra_p2->setPos(barra->x(),dy-260);
+        barra->setPos(barra->x(),dy+(yvi/2));
+        if(jugadores==2) barra_p2->setPos(barra->x(),dy-(yvi/2));
     }
 
-    //en este ciclo se maneja el movimiento de los enemigos    
+    //en este ciclo se maneja el movimiento de los enemigos cuando son 2 jugadores
     if(jugadores==2){
         for(;it!=enemys.end();it++){
             if((abs(dx-(*it)->x()))<400 && (abs(dy-(*it)->y()))<300){
@@ -177,11 +205,11 @@ void Nivel_1::act_per(){
                     (*it)->mover(player_2->x(),player_2->y());
                 else
                     (*it)->mover(player->x(),player->y());
-                if(dy<30){
+                if((*it)->toque(player_2->x(),player_2->y())){
                     player_2->setVida(player_2->getVida()-10);
                     scene->removeItem((*it));
                     (*it)->setPos(10000,10000);}
-                if(dx<30){
+                if((*it)->toque(player->x(),player->y())){
                     player->setVida(player->getVida()-10);
                     scene->removeItem((*it));
                     (*it)->setPos(10000,10000);}
@@ -189,6 +217,7 @@ void Nivel_1::act_per(){
             }
         }
     }
+    //en este ciclo se maneja el movimiento de los enemigos cuando es un jugador
     else{
         for(;it!=enemys.end();it++){
             dx=abs(player->x()-(*it)->x());
@@ -196,7 +225,7 @@ void Nivel_1::act_per(){
             if(dx<400 && dy<300){
                 (*it)->mover(player->x(),player->y());
                 dx=sqrt(pow(player->x()+12-(*it)->x(),2)+pow(player->y()+20-(*it)->y(),2));
-                if(dx<30){
+                if((*it)->toque(player->x(),player->y())){
                     player->setVida(player->getVida()-10);
                     scene->removeItem((*it));
                     (*it)->setPos(10000,10000);
@@ -210,6 +239,7 @@ void Nivel_1::act_per(){
 
 void Nivel_1::act_items(){
     QList <items *>::iterator it=itemss.begin();
+    //este ciclo verifica si el jugador ha tocado algun item
     for(;it!=itemss.end();it++){
         if((*it)->toque(player->x(),player->y()) && player->getVida()<100){
             player->setVida(player->getVida()+(*it)->getcura());
@@ -293,4 +323,19 @@ void Nivel_1::act_barra(){
         else if(player_2->getVida()>=0 && player_2->getVida()<10)
             barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 0%.png").scaled(500,20));
     }
+}
+
+QString Nivel_1::int2str(long a){
+    int c=0,i=1;
+    char e;
+    QString b;
+    for(;(a/i);i=i*10)
+        c++;
+    for(int j=0;j<c;j++){
+        i/=10;
+        e=(a/i)+48;
+        b.push_back(e);
+        a-=(a/i)*i;
+    }
+    return b;
 }

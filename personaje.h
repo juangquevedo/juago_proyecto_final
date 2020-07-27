@@ -13,7 +13,7 @@ public:
     void setSkin(int skin);
     //movimiento del personaje
     void mover_personaje(int Fx,int Fy,double cf);
-    void actualizar();
+    void actualizar(int xmap, int ymap);
     //funciones get y set
     void setVida(int nv);
     int getVida();

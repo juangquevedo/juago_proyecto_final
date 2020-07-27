@@ -6,6 +6,7 @@
 
 #include "nivel_1.h"
 
+//cree otra ventana para acomodar mejor la eleccion en multijugador
 namespace Ui {
 class menu_2_jugadores;
 }

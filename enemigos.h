@@ -15,6 +15,7 @@ public:
 
     //metodos de la clase
     void mover(int px, int py);
+    bool toque(int px, int py);
 
     //metodos set y get
     void setVel(double nvx);
@@ -22,7 +23,7 @@ public:
 
 private:
     //atributos
-    double vel=0.5;
+    double vel=0.4;
 };
 
 #endif // ENEMIGOS_H

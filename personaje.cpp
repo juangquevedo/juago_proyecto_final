@@ -37,15 +37,18 @@ void personaje::mover_personaje(int Fx, int Fy, double cf){
         Ay=((Fy*p*60)-fric)/masa;
 }
 
-void personaje::actualizar(){
+void personaje::actualizar(int xmap, int ymap){
     //esta funcion calcula la friccion de donde se encuentre el personaje
-    //y calcula el movimiento del personaje
+    //y calcula el movimiento del personaje, no permite que se salga del mapa
     double x=(this->x()),y=(this->y());
     Vx=Ax*t;
     Vy=Ay*t;
     x+=(Vx*t*1.5)+(0.5*Ax*pow(t,2));
     y+=(Vy*t*1.5)+(0.5*Ay*pow(t,2));
-    this->setPos(x,y);
+    if(x>0 && x<xmap-25)
+        this->setPos(x,this->y());
+    if(y>0 && y<ymap-40)
+        this->setPos(this->x(),y);
     if(Ax<0)
         Ax+=fric/masa;
     else if(Ax>0)

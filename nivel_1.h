@@ -34,12 +34,15 @@ public:
     explicit Nivel_1(QWidget *parent = nullptr);
     ~Nivel_1();
     void nivel_2();
+    void nivel_3();
     void keyPressEvent(QKeyEvent * event);
     void dos_jugadores(int skin_2);
     void setskin(int skin);
     void crear_enemigos();
     void crear_items();
     void act_barra();
+
+    QString int2str(int long a);
 
 private slots:
     void act_per();
@@ -56,6 +59,7 @@ private:
     QGraphicsPixmapItem *barra,*barra_p2;
     int jugadores, enemi=10;
     int xmap=2560,ymap=1280;
+    int xvi=800,yvi=600;
     double fric=0.5;
     bool dead=0;
 };
