@@ -43,8 +43,8 @@ void personaje::actualizar(){
     double x=(this->x()),y=(this->y());
     Vx=Ax*t;
     Vy=Ay*t;
-    x+=(Vx*t)+(0.5*Ax*pow(t,2));
-    y+=(Vy*t)+(0.5*Ay*pow(t,2));
+    x+=(Vx*t*1.5)+(0.5*Ax*pow(t,2));
+    y+=(Vy*t*1.5)+(0.5*Ay*pow(t,2));
     this->setPos(x,y);
     if(Ax<0)
         Ax+=fric/masa;

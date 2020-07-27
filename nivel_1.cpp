@@ -46,6 +46,15 @@ Nivel_1::~Nivel_1(){
     if(jugadores==2) delete player_2;
 }
 
+void Nivel_1::nivel_2(){
+    player->setPos(10,10);
+    xmap=1182;
+    ymap=321;
+    scene->setSceneRect(0,0,xmap,ymap);
+    scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Imagenes/mapa edificio.png").scaled(xmap,ymap)));
+    enemi+=5;
+}
+
 void Nivel_1::keyPressEvent(QKeyEvent *event){
     if(jugadores==1){
         if(event->key() == Qt::Key_W)

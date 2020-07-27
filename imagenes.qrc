@@ -20,5 +20,6 @@
         <file>Imagenes/barra 100%.png</file>
         <file>Imagenes/mapa pokemon.jpg</file>
         <file>Imagenes/anti-bacterial.png</file>
+        <file>Imagenes/mapa edificio.png</file>
     </qresource>
 </RCC>

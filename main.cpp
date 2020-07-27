@@ -7,8 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Nivel_1 w;
-    w.setskin(2);
+    Menu w;
     w.show();
     return a.exec();
 }
