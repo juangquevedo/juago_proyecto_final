@@ -22,6 +22,7 @@ SOURCES += \
     menu.cpp \
     menu_2_jugadores.cpp \
     nivel_1.cpp \
+    paredes.cpp \
     personaje.cpp
 
 HEADERS += \
@@ -30,6 +31,7 @@ HEADERS += \
     menu.h \
     menu_2_jugadores.h \
     nivel_1.h \
+    paredes.h \
     personaje.h
 
 FORMS += \

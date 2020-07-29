@@ -5,9 +5,6 @@ Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
     ui->setupUi(this);
 
     level1= new Nivel_1;
-//    level1->setskin(2);
-//    level1->show();
-//    this->close();
 
     //se desabilita los botones para no causar errores
     ui->bot_nil_1->setEnabled(false);

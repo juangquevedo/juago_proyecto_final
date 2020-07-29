@@ -1,6 +1,10 @@
 #ifndef NIVEL_1_H
 #define NIVEL_1_H
 
+#include <iostream>
+
+using namespace std;
+
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -21,6 +25,7 @@
 #include <personaje.h>
 #include <enemigos.h>
 #include <items.h>
+#include "paredes.h"
 
 namespace Ui {
 class Nivel_1;
@@ -41,6 +46,8 @@ public:
     void crear_enemigos();
     void crear_items();
     void act_barra();
+    void cargar_paredes();
+    long int str2int(string a);
 
     QString int2str(int long a);
 
@@ -55,9 +62,10 @@ private:
     personaje *player,*player_2;
     QList <enemigos *> enemys;
     QList <items *> itemss;
+    QList <paredes> Lparedes;
     QTimer *time_personje,*time_items;
     QGraphicsPixmapItem *barra,*barra_p2;
-    int jugadores, enemi=10;
+    int jugadores, enemi=10, nive=1;
     int xmap=2560,ymap=1280;
     int xvi=800,yvi=600;
     double fric=0.5;
