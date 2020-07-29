@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Imagenes/inicio/bien_hecho.PNG</file>
+        <file>Imagenes/inicio/fondo.PNG</file>
+        <file>Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg</file>
+        <file>Imagenes/inicio/mal_hecho.PNG</file>
+        <file>Imagenes/inicio/PANDEMIA.PNG</file>
+        <file>Imagenes/inicio/punto1.PNG</file>
+        <file>Imagenes/inicio/punto2.PNG</file>
+        <file>Imagenes/inicio/punto3.PNG</file>
+        <file>Imagenes/inicio/punto4.PNG</file>
+        <file>Imagenes/defensa.PNG</file>
+        <file>Imagenes/splash.PNG</file>
+    </qresource>
+</RCC>

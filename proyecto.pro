@@ -16,20 +16,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    a_jugar.cpp \
+    antibacterias.cpp \
     enemigos.cpp \
+    inicio_acceso.cpp \
+    items.cpp \
     main.cpp \
     menu.cpp \
+    menu_2_jugadores.cpp \
     nivel_1.cpp \
     personaje.cpp
 
 HEADERS += \
+    a_jugar.h \
+    antibacterias.h \
     enemigos.h \
+    inicio_acceso.h \
+    items.h \
     menu.h \
+    menu_2_jugadores.h \
     nivel_1.h \
     personaje.h
 
 FORMS += \
+    a_jugar.ui \
+    inicio_acceso.ui \
     menu.ui \
+    menu_2_jugadores.ui \
     nivel_1.ui
 
 # Default rules for deployment.
@@ -38,4 +51,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    imagenes.qrc
+    imagenes.qrc \
+    images.qrc
+
+DISTFILES += \
+    Imagenes/fondo_escena.PNG

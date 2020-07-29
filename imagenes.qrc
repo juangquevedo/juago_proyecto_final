@@ -1,12 +1,7 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
-        <file>Imagenes/icono_nivel_1.png</file>
-        <file>Imagenes/icono_nivel_3.png</file>
-        <file>Imagenes/skin_1.png</file>
-        <file>Imagenes/skin_2.png</file>
-        <file>Imagenes/skin_3.png</file>
-        <file>Imagenes/virus.png</file>
-        <file>Imagenes/mapa_provisional.png</file>
+    <qresource prefix="/">
+        <file>Imagenes/fondo_person.PNG</file>
+        <file>Imagenes/anti-bacterial.png</file>
         <file>Imagenes/barra 0%.png</file>
         <file>Imagenes/barra 10%.png</file>
         <file>Imagenes/barra 20%.png</file>
@@ -18,5 +13,13 @@
         <file>Imagenes/barra 80%.png</file>
         <file>Imagenes/barra 90%.png</file>
         <file>Imagenes/barra 100%.png</file>
+        <file>Imagenes/icono_nivel_1.png</file>
+        <file>Imagenes/icono_nivel_3.png</file>
+        <file>Imagenes/skin_1.png</file>
+        <file>Imagenes/skin_2.png</file>
+        <file>Imagenes/skin_3.png</file>
+        <file>Imagenes/virus.png</file>
+        <file>Imagenes/mapa edificio.png</file>
+        <file>Imagenes/mapa pokemon.jpg</file>
     </qresource>
 </RCC>
