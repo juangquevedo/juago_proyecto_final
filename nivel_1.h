@@ -47,6 +47,7 @@ public:
     void crear_items();
     void act_barra();
     void cargar_paredes();
+    void cargar_nivel();
     long int str2int(string a);
 
     QString int2str(int long a);
@@ -65,10 +66,10 @@ private:
     QList <paredes> Lparedes;
     QTimer *time_personje,*time_items;
     QGraphicsPixmapItem *barra,*barra_p2;
-    int jugadores, enemi=10, nive=1;
+    int jugadores, enemi=15, nive=1;
     int xmap=2560,ymap=1280;
     int xvi=800,yvi=600;
-    double fric=0.5;
+    double fric=0.7;
     bool dead=0;
 };
 

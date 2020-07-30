@@ -21,7 +21,7 @@ public:
     int getVida();
 private:
     //estas son las caracteristicas del personaje
-    double t=0.03;
+    double t=0.05;
     double Vx=0,Vy=0;
     double Ax=0,Ay=0;
     double fric;
