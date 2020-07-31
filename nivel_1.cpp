@@ -53,7 +53,7 @@ void Nivel_1::nivel_2(){
     xmap=1182;
     ymap=321;
     yvi=ymap;
-    fric=0.7;
+    fric=1.7;
     nive=2;
     view->resize(xvi,yvi+20);
     this->resize(xvi,yvi+20);
@@ -65,7 +65,7 @@ void Nivel_1::nivel_2(){
 void Nivel_1::nivel_3(){
     //cambios para que el nivel concuerde con la ecena y suba la dificultad
     player->setPos(371,187);
-    enemi+=5;
+    enemi+=10;
 }
 
 void Nivel_1::keyPressEvent(QKeyEvent *event){
@@ -91,6 +91,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
             player->setPos(player->x()-1,player->y());
         if(event->key() == Qt::Key_L)
             player->setPos(player->x()+1,player->y());
+        if(event->key()==Qt::Key_Space)
+            player->parar();
     }
     //movimiento para cuando hay 2 jugadores
     else{
@@ -200,8 +202,8 @@ void Nivel_1::act_per(){
         if(jugadores==2) barra_p2->setPos(dx-250,barra_p2->y());
     }
     if(dy>280 && dy<ymap-280){
-        barra->setPos(barra->x(),dy+260);
-        if(jugadores==2) barra_p2->setPos(barra_p2->x(),dy-260);
+        barra->setPos(barra->x(),dy+(yvi/2)-40);
+        if(jugadores==2) barra_p2->setPos(barra_p2->x(),dy-(yvi/2)+40);
     }
 
     //en este ciclo se maneja el movimiento de los enemigos cuando son 2 jugadores
@@ -281,6 +283,39 @@ void Nivel_1::act_items(){
             player_2->setPos(20000,20000);
         }
     }
+
+    if(nive==1){
+        if(player->x()>338 && player->x()<430 && player->y()>164 && player->y()<198){
+            player->setPos(20000,20000);
+            Nivel_1 *a= new Nivel_1;
+            (*a).nivel_2();
+            (*a).setskin(player->getSkin());
+            (*a).player->setVida(player->getVida());
+            if(jugadores==2){
+                player_2->setPos(20000,20000);
+                (*a).dos_jugadores(player_2->getSkin());
+                (*a).player_2->setVida(player_2->getVida());}
+            (*a).cargar_nivel();
+            this->close();
+            (*a).show();
+        }
+    }
+    if(nive==2){
+        if(player->x()>1044 && player->x()<1098 && player->y()<28){
+            player->setPos(20000,20000);
+            Nivel_1 *a=new Nivel_1;
+            (*a).nivel_3();
+            (*a).setskin(player->getSkin());
+            (*a).player->setVida(player->getVida());
+            if(jugadores==2){
+                player_2->setPos(20000,20000);
+                (*a).dos_jugadores(player_2->getSkin());
+                (*a).player_2->setVida(player_2->getVida());}
+            (*a).cargar_nivel();
+            this->close();
+            (*a).show();
+        }
+    }
 }
 
 void Nivel_1::act_barra(){
@@ -339,7 +374,7 @@ void Nivel_1::cargar_paredes(){
     char s;
     int temp[4],pos=0;
     long long int tam;
-    if(nive==2) arch="paredes_n_1.txt";
+    if(nive==2) arch="paredes_n_2.txt";
     fstream k_1(arch, ios::in | ios::ate);
     tam=k_1.tellg();
     k_1.close();
@@ -367,9 +402,9 @@ void Nivel_1::cargar_paredes(){
 
 void Nivel_1::cargar_nivel(){
     //inicio de enemigos e items
+    cargar_paredes();
     crear_enemigos();
     crear_items();
-    cargar_paredes();
     //inicio los timers ahora para que si se reflejen los cambios del nivel
     time_personje->start(10);
     time_items->start(10);
