@@ -1,6 +1,11 @@
 #include "nivel_1.h"
 #include "ui_nivel_1.h"
+#include "a_jugar.h"
+#include "menu.h"
+#include "menu_2_jugadores.h"
+#include <iomanip>
 
+extern a_jugar *a_jugar1;
 Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     ui->setupUi(this);
 
@@ -87,6 +92,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
         if(event->key() == Qt::Key_D)
             player->mover_personaje(1,0,fric);
             //player->setPos(player->x()+10,player->y());
+        if(event->key() == Qt::Key_G)
+            guardar();
     }
     //movimiento para cuando hay 2 jugadores
     else{
@@ -113,6 +120,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
 
         if(event->key() == Qt::Key_L)
             player_2->mover_personaje(1,0,fric);
+        if(event->key() == Qt::Key_H)
+            guardar();
     }
 }
 
@@ -156,6 +165,7 @@ void Nivel_1::crear_enemigos(){
         enemys.push_back(new enemigos);
         enemys.back()->setPos(10+rand()%((xmap-30)-9),10+rand()%((ymap-30)-9));
         scene->addItem(enemys.back());
+
     }
 }
 void Nivel_1::crear_items(){
@@ -343,8 +353,73 @@ void Nivel_1::act_items(){
 //    return false;
 //}
 
-//bool Nivel_1::guardar()
-//{
+void Nivel_1::guardar()
+{
+    nombre =a_jugar1->name;
+    qDebug()<<nombre;
+    // Variables para trabajar con ficheros
+    ofstream aux;
+    //traer vida y posición del personaje
+    int Vidas=player->getVida();
+    int posx= player->x();
+    int posy= player->y();
+    int skin1= player->getSkin();
+    //para personaje2
+    int Vidas2=player_2->getVida();
+    int posx2= player_2->x();
+    int posy2= player_2->y();
+    int skinx1= player_2->getSkin();
+    int skin2= player_2->getSkin();
+    ostringstream nameplayer;
+    nameplayer<< nombre.toStdString() << ".txt";
+    aux.open(nameplayer.str().c_str(),ios::out|ios::trunc); //Se abre fichero;
+
+    if(aux.is_open()){ //Si se encuentra el jugador
+            //Se escribe en el archivo 
+           aux<<"Jugadores"<<jugadores<<endl;
+           //aux<<"Nivel"<<;
+           aux<<"Skin"<<skin1<<endl;
+           aux<<"PosX"<<setprecision(2)<<posx<<endl;
+           aux<<"PosY"<<setprecision(2)<<posy<<endl;
+           aux<<"Vida"<<Vidas<<endl;
+           qDebug()<<"Posición en x"<<posx<<endl;
+           qDebug()<<"Posición en y"<<posy<<endl;
+           qDebug()<<"vida"<<Vidas<<endl;
+           qDebug()<<"skin"<<skin1<<endl;
+            //Se cierran los archivos
+
+    if (jugadores==2){
+            //Se escribe en el archivo
+        aux<<"Skin2"<<skin1<<endl;
+        aux<<"PosX"<<setprecision(2)<<posx<<endl;
+        aux<<"PosY"<<setprecision(2)<<posy<<endl;
+        aux<<"Vida"<<Vidas<<endl;
+            aux<<left<<skinx1<<setw(13)<<posx<<setw(7)<<setprecision(2)<<right<<posy<<setw(7)<<setprecision(2)<<right<< Vidas<<setw(7)<<setprecision(2)<<right<<endl;
+            aux<<left<<skin2<<setw(13)<<posx2<<setw(7)<<setprecision(2)<<right<<posy2<<setw(7)<<setprecision(2)<<right<< Vidas2<<setw(7)<<setprecision(2)<<right<<endl;
+            //qDebug()<<"jugador"<<jugador<<endl;
+            //Se cierran los archivos
+            }
+        }
+    aux.close();
+
+}
+
+//    QFile archivo(texto); //leer el archivo
+//        if(!archivo.open(QFile::ReadOnly)) //condicion que pregunta si no lo pudo abrir
+//        {
+//            QMessageBox::warning(this,"UUYYYY :V","ERROR AL ABRIR EL ARCHIVO"); //mensaje que dice que no se pudo leer
+//        }
+//        QTextStream in(&archivo); //crear un flujo de lectura
+//        texto=in.readAll(); //leer todo el archivo
+//        QStringList lista_archivo=texto.split(QLatin1Char(',')); //crear una lista de
+//        archivo.close(); //cerrar el archivo
+//        int nivel=0; //iniciari variable nivel
+//        for(int i=0;i<lista_archivo.size();i++) //ciclo que recorre toda la lista
+//        {
+//            if(i==0){vidas->setVidas(lista_archivo.at(0).toInt());} //dar el valor de vidas
+//            if(i==1){probabilidad->setTope(lista_archivo.at(1).toInt());} //dar el valor de probabilidad
+//            if(i==2){nivel=lista_archivo.at(2).toInt();} //dar el valor del nivel
+//        }
 //    QString info;
 //    QString usuario;
 //    QFile file("Partidas");                       //Objeto para manejar la lectura y escritura del archivo
@@ -369,26 +444,24 @@ void Nivel_1::act_items(){
 //    stream << user << " " << level << " " << salud->getSalud() << " " << score->getScore() << endl;
 //    file.close();
 //    return true;
-//}
 
-//void Game::mousePressEvent(QMouseEvent *event)
+
+//void Nivel_1::mousePressEvent(QMouseEvent *event)
 //{
-//    //Contar balas gastadas
-//    player->incrementarBalas();
+//    //Contar defensa gastadas
+//    player->incrementardefensa();
 //    float rotationdeg = player->getRotation();
-//    player->shoottimer();
-
 //    //Crear una nueva bala
-//    Bala* bala = new Bala();
+//    antibacterias* defensa = new antibacterias();
 //    float x1 = player->x()+(cos(rotationdeg*3.1416/180)) + 15;
 //    float y1 = player->y()+(sin(rotationdeg*3.1416/180)) + 27;
-//    bala->setPos(x1, y1);
-//    bala->setDir(x1, y1,(sin(rotationdeg*3.1416/180))*300 , (-cos(rotationdeg*3.1416/180))*300);
-//    bala->setRotation(rotationdeg);
-//    scene->addItem(bala);
+//    defensa->setPos(x1, y1);
+//    defensa->direcciones(x1, y1,(sin(rotationdeg*3.1416/180))*300 , (-cos(rotationdeg*3.1416/180))*300);
+//    defensa->setRotation(rotationdeg);
+//    scene->addItem(defensa);
 //}
 
-//void Game::mouseMoveEvent(QMouseEvent *event)
+//void Nivel_1::mouseMoveEvent(QMouseEvent *event)
 //{
 //    player->rotate(event->x()+x11 - player->x(), event->y()+y11 - player->y());
 //}
@@ -459,4 +532,8 @@ QString Nivel_1::int2str(long a){
     }
     return b;
 }
+//void Nivel_1::decrementarenemigos()
+//{
+//    numEnemigos--;
+//}
 

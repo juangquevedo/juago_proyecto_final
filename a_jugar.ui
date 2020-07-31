@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1196</width>
-    <height>535</height>
+    <height>536</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
 font: 75 20pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);
 selection-color: rgb(255, 0, 0);
-background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg);</string>
+background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
     </property>
     <property name="text">
      <string>1 Jugador</string>
@@ -69,7 +69,7 @@ background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-3
 font: 75 18pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);
 selection-color: rgb(255, 0, 0);
-background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg);</string>
+background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
     </property>
     <property name="text">
      <string>2 Jugadores</string>
@@ -96,9 +96,9 @@ background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-3
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 0, 0);
 font: 75 20pt &quot;MS Shell Dlg 2&quot;;
-background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg);
 color: rgb(255, 0, 0);
-selection-color: rgb(255, 0, 0);</string>
+selection-color: rgb(255, 0, 0);
+background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
     </property>
     <property name="text">
      <string>Cargar</string>
@@ -110,7 +110,7 @@ selection-color: rgb(255, 0, 0);</string>
       <x>0</x>
       <y>0</y>
       <width>1201</width>
-      <height>491</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="styleSheet">

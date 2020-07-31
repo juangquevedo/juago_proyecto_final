@@ -1,25 +1,36 @@
 #include "personaje.h"
+#include "nivel_1.h"
 
+//extern Nivel_1* nivel1; // Objeto global externo llamado nivel1
 personaje::personaje(){
     setPixmap(QPixmap(":/Imagenes/skin_1.png").scaled(25,40));
 }
 
 void personaje::setSkin(int skin){
+    skinval=skin;
     //estas son las apariencias que puede tener el personaje
     switch (skin){
-    case 1:
+    case 1:       
         setPixmap(QPixmap(":/Imagenes/skin_1.png").scaled(25,40));
         break;
     case 2:
+
         setPixmap(QPixmap(":/Imagenes/skin_2.png").scaled(25,40));
         break;
     case 3:
+
         setPixmap(QPixmap(":/Imagenes/skin_3.png").scaled(25,40));
         break;
     default:
+        skin=1;
         setPixmap(QPixmap(":/Imagenes/skin_1.png").scaled(25,40));
         break;
     }
+}
+
+int personaje::getSkin(){
+
+return skinval;
 }
 
 void personaje::mover_personaje(int Fx, int Fy, double cf){
@@ -63,17 +74,18 @@ void personaje::setVida(int nv){
     vida=nv;
 }
 
-//void personaje::incrementardefensa()
-//{
-//    numdefen++;
-//}
-//void personaje::rotacion(int x, int y)
-//{
-//    setTransformOriginPoint(20, 20);
-//    qreal deg = atan2(y, x)*180/3.14159;
-//    setRotation(deg+90);
-//    rotaciondeg = deg+90;
-//}
+void personaje::incrementardefensa()
+{
+    numdefen++;
+}
+void personaje::rotacion(int x, int y)
+{
+
+   setTransformOriginPoint(20, 20);
+   qreal deg = atan2(y, x)*180/3.14159;
+   setRotation(deg+90);
+    rotaciondeg = deg+90;
+}
 int personaje::getVida(){
     return vida;
 }

@@ -23,6 +23,7 @@ Menu::~Menu(){
 
 void Menu::on_bot_nil_1_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    //level1->guardar(skin,0,0);
     level1->setskin(skin);
     level1->show();
     this->close();
@@ -30,6 +31,7 @@ void Menu::on_bot_nil_1_clicked(){
 
 void Menu::on_bot_nil_2_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    //level1->guardar(skin,0,0);
     level1->setskin(skin);
     level1->show();
     this->close();
@@ -37,6 +39,7 @@ void Menu::on_bot_nil_2_clicked(){
 
 void Menu::on_bot_nil_3_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    //level1->guardar(skin,0,0);
     level1->setskin(skin);
     level1->show();
     this->close();

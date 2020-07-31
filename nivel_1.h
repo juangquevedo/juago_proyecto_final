@@ -14,16 +14,17 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QMouseEvent>
-
+#include <sstream>
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 
-#include <personaje.h>
 #include <enemigos.h>
 #include <items.h>
-
+#include "personaje.h"
+#include "antibacterias.h"
+using namespace std;
 namespace Ui {
 class Nivel_1;
 }
@@ -43,12 +44,15 @@ public:
     void crear_enemigos();
     void crear_items();
     void act_barra();
+    //void decrementarenemigos();
     //int realAngle(int vx_, int vy_);
+    //int numEnemigos;
+
     //bool cargar();
-    //bool guardar();
+    void guardar();
     //Eventos
 //    void mousePressEvent(QMouseEvent* event);
-//    void mouseMoveEvent(QMouseEvent* event);
+   // void mouseMoveEvent(QMouseEvent* event);
 
     QString int2str(int long a);
 
@@ -71,6 +75,7 @@ private:
     int xvi=800,yvi=600;
     double fric=0.5;
     bool dead=0;
+    QString nombre;
 };
 
 #endif // NIVEL_1_H

@@ -1,6 +1,8 @@
 #include "inicio_acceso.h"
 #include "ui_inicio_acceso.h"
+#include <QMediaPlayer>
 
+a_jugar *a_jugar1;
 inicio_acceso::inicio_acceso(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::inicio_acceso)
@@ -11,7 +13,10 @@ inicio_acceso::inicio_acceso(QWidget *parent)
     ui->preg2->hide();
     ui->preg3->hide();
     ui->preg4->hide();
-
+    soundrack = new QMediaPlayer;
+    soundrack-> setMedia(QUrl("qrc:/Audios/background-suspense-music-suspenseful-dramatic-film-soundtracks-anticipation.mp3"));
+    soundrack->setVolume(0);
+    soundrack->play();
     fin = new QTimer(this);
     fin-> stop();
     connect(fin,SIGNAL(timeout()),this,SLOT(final()));
