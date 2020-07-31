@@ -37,6 +37,7 @@ void Menu::on_bot_nil_2_clicked(){
 
 void Menu::on_bot_nil_3_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level1->nivel_3();
     level1->setskin(skin);
     level1->cargar_nivel();
     level1->show();

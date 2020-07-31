@@ -65,7 +65,8 @@ void Nivel_1::nivel_2(){
 void Nivel_1::nivel_3(){
     //cambios para que el nivel concuerde con la ecena y suba la dificultad
     player->setPos(371,187);
-    enemi+=10;
+    enemi+=15;
+    nive=3;
 }
 
 void Nivel_1::keyPressEvent(QKeyEvent *event){
@@ -135,12 +136,15 @@ void Nivel_1::dos_jugadores(int skin_2){
     player_2= new personaje;
     player_2->setSkin(skin_2);
     scene->addItem(player_2);
-    player_2->setPos(780,750);
+    if(nive==1)player_2->setPos(1990,1106);
+    else if(nive==2) player_2->setPos(50,30);
+    else player_2->setPos(371,227);
 
     barra_p2= new QGraphicsPixmapItem;
     barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra_p2);
     barra_p2->setPos(player->x()-250,player->y()-270);
+    if(nive==2) barra_p2->setPos(30,10);
 
     //aumenta los enemigos al doble
     enemi*=2;
@@ -209,23 +213,21 @@ void Nivel_1::act_per(){
     //en este ciclo se maneja el movimiento de los enemigos cuando son 2 jugadores
     if(jugadores==2){
         for(;it!=enemys.end();it++){
-            if((abs(dx-(*it)->x()))<400 && (abs(dy-(*it)->y()))<300){
                 dx=sqrt(pow(player->x()+12-(*it)->x(),2)+pow(player->y()+20-(*it)->y(),2));
                 dy=sqrt(pow(player_2->x()+12-(*it)->x(),2)+pow(player_2->y()+20-(*it)->y(),2));
                 if(dx>dy)
                     (*it)->mover(player_2->x(),player_2->y());
                 else
                     (*it)->mover(player->x(),player->y());
-                if((*it)->toque(player_2->x(),player_2->y())){
-                    player_2->setVida(player_2->getVida()-10);
-                    scene->removeItem((*it));
-                    (*it)->setPos(10000,10000);}
-                if((*it)->toque(player->x(),player->y())){
-                    player->setVida(player->getVida()-10);
-                    scene->removeItem((*it));
-                    (*it)->setPos(10000,10000);}
-                act_barra();
-            }
+            if((*it)->toque(player_2->x(),player_2->y())){
+                player_2->setVida(player_2->getVida()-10);
+                scene->removeItem((*it));
+                (*it)->setPos(10000,10000);}
+            if((*it)->toque(player->x(),player->y())){
+                player->setVida(player->getVida()-10);
+                scene->removeItem((*it));
+                (*it)->setPos(10000,10000);}
+            act_barra();
         }
     }
     //en este ciclo se maneja el movimiento de los enemigos cuando es un jugador
@@ -271,16 +273,17 @@ void Nivel_1::act_items(){
         mensaje.setText("Perdiste judor 1");
         mensaje.exec();
         scene->removeItem(player);
-        player->setPos(20000,20000);
-        dead=1;
+        time_items->stop();
+        time_personje->stop();
     }
-    if(jugadores==2){
+    if(jugadores==2 && !dead){
         if(player_2->getVida()<=0){
             QMessageBox mensaje;
             mensaje.setText("Perdiste jugador 2");
             mensaje.exec();
             scene->removeItem(player);
-            player_2->setPos(20000,20000);
+            time_items->stop();
+            time_personje->stop();
         }
     }
 
@@ -300,7 +303,7 @@ void Nivel_1::act_items(){
             (*a).show();
         }
     }
-    if(nive==2){
+    else if(nive==2){
         if(player->x()>1044 && player->x()<1098 && player->y()<28){
             player->setPos(20000,20000);
             Nivel_1 *a=new Nivel_1;
@@ -314,6 +317,19 @@ void Nivel_1::act_items(){
             (*a).cargar_nivel();
             this->close();
             (*a).show();
+        }
+    }
+    else{
+        if(player->x()>1934 && player->x()<1993 && player->y()>1079 && player->y()<1103){
+            time_items->stop();
+            time_personje->stop();
+            QList <enemigos *>::iterator eli;
+            for(eli=enemys.begin();eli!=enemys.end();eli++)
+                scene->removeItem(*eli);
+            enemys.clear();
+            QMessageBox mensaje;
+            mensaje.setText("Has sobrevivido al virus");
+            mensaje.exec();
         }
     }
 }
@@ -405,6 +421,11 @@ void Nivel_1::cargar_nivel(){
     cargar_paredes();
     crear_enemigos();
     crear_items();
+    if(nive==3){
+        QList <enemigos *>::iterator eli=enemys.begin();
+        for(;eli!=enemys.end();eli++)
+            (*eli)->setVel((*eli)->getVel()*2);
+    }
     //inicio los timers ahora para que si se reflejen los cambios del nivel
     time_personje->start(10);
     time_items->start(10);
