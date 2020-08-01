@@ -52,12 +52,13 @@ Nivel_1::Nivel_1(int jugadores, int nivel, vector<int> &vidas,vector<float> &pos
     scene->setSceneRect(0,0,xmap,ymap);
     player= new personaje;
     barra= new QGraphicsPixmapItem;
-    if (nivel==1 || nivel==3){
+    if (nivel==1){
     scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
     view->setScene(scene);
     view->resize(xvi,yvi);
     this->resize(xvi,yvi);}
     else if(nivel==2){nivel_2();}
+    else if(nivel==3){nivel_3();}
 
     //inicio del personaje
     //jugadores=1;
@@ -119,6 +120,7 @@ void Nivel_1::nivel_2(){
 
 void Nivel_1::nivel_3(){
     //cambios para que el nivel concuerde con la ecena y suba la dificultad
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa pokemon noche.jpg").scaled(2560,1280)));
     player->setPos(371,187);
     enemi+=15;
     nive=3;
@@ -138,17 +140,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
 
         if(event->key() == Qt::Key_D)
             player->mover_personaje(1,0,fric);
-        //teclas para hallar ubicaciones
-        if(event->key() == Qt::Key_I)
-            player->setPos(player->x(),player->y()-1);
-        if(event->key() == Qt::Key_K)
-            player->setPos(player->x(),player->y()+1);
-        if(event->key() == Qt::Key_J)
-            player->setPos(player->x()-1,player->y());
-        if(event->key() == Qt::Key_L)
-            player->setPos(player->x()+1,player->y());
-        if(event->key()==Qt::Key_Space)
-            player->parar();
+
         if(event->key() == Qt::Key_G)
             guardar();
     }
@@ -179,13 +171,6 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
             player_2->mover_personaje(1,0,fric);
         if(event->key() == Qt::Key_H)
             guardar();
-    }
-    //este es temporal para saber las ubicaciones de las paredes
-    if(event->key() == Qt::Key_P){
-        QMessageBox mensaje;
-        QString b="X: "+int2str(player->x())+"Y: "+int2str(player->y());
-        mensaje.setText(b);
-        mensaje.exec();
     }
 }
 

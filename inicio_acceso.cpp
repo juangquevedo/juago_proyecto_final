@@ -15,7 +15,7 @@ inicio_acceso::inicio_acceso(QWidget *parent)
     ui->preg4->hide();
     soundrack = new QMediaPlayer;
     soundrack-> setMedia(QUrl("qrc:/Audios/background-suspense-music-suspenseful-dramatic-film-soundtracks-anticipation.mp3"));
-    soundrack->setVolume(0);
+    soundrack->setVolume(10);
     soundrack->play();
     fin = new QTimer(this);
     fin-> stop();
