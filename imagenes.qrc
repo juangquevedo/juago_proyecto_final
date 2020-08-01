@@ -21,5 +21,6 @@
         <file>Imagenes/virus.png</file>
         <file>Imagenes/mapa edificio.png</file>
         <file>Imagenes/mapa pokemon.jpg</file>
+
     </qresource>
 </RCC>

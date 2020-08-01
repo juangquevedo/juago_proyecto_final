@@ -16,7 +16,6 @@ public:
     //metodos de la clase
     void mover(int px, int py);
     bool toque(int px, int py);
-    //int getpos();
 
     //metodos set y get
     void setVel(double nvx);

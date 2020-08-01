@@ -9,7 +9,6 @@ extern a_jugar *a_jugar1;
 Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     ui->setupUi(this);
 
-
     //inicio de la escena y la vista
     scene= new QGraphicsScene(this);
     view= new QGraphicsView(this);
@@ -40,10 +39,60 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     barra= new QGraphicsPixmapItem;
     barra->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra);
-    barra->setPos(player->x()-250,player->y()+270);
+    barra->setPos(player->x()-250,player->y()+150);
 
 }
 
+Nivel_1::Nivel_1(int jugadores, int nivel, vector<int> &vidas,vector<float> &posxs,vector<float> &posys,vector<int> &skins, QWidget *parent): QMainWindow(parent),ui(new Ui::Nivel_1){
+    ui->setupUi(this);
+
+    //inicio de la escena y la vista
+    scene= new QGraphicsScene(this);
+    view= new QGraphicsView(this);
+    scene->setSceneRect(0,0,xmap,ymap);
+    player= new personaje;
+    barra= new QGraphicsPixmapItem;
+    if (nivel==1 || nivel==3){
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
+    view->setScene(scene);
+    view->resize(xvi,yvi);
+    this->resize(xvi,yvi);}
+    else if(nivel==2){nivel_2();}
+
+    //inicio del personaje
+    //jugadores=1;
+    player->setSkin(skins[0]);
+    player->setPos(posxs[0],posys[0]);
+    scene->addItem(player);
+    view->centerOn(player->x(),player->y());
+    player->setVida(vidas[0]);
+    if (jugadores==2){
+    player_2= new personaje;
+    barra_p2= new QGraphicsPixmapItem;
+    player_2->setSkin(skins[1]);
+    player->setPos(posxs[1],posys[1]);
+    scene->addItem(player_2);
+    player->setVida(vidas[1]);
+      }
+
+    //timmers
+    time_personje= new QTimer;
+    time_items= new QTimer;
+
+    time_personje->stop();
+    time_items->stop();
+    connect(time_personje,SIGNAL(timeout()),this,SLOT(act_per()));
+    connect(time_items,SIGNAL(timeout()),this,SLOT(act_items()));
+
+    //inicio de la barra de vida
+
+    act_barra();
+    scene->addItem(barra);
+    barra->setPos(player->x()-250,player->y()+150);
+    scene->addItem(barra_p2);
+    barra_p2->setPos(player->x()-250,player->y()-270);
+
+}
 Nivel_1::~Nivel_1(){
     delete ui;
     delete scene;
@@ -53,14 +102,14 @@ Nivel_1::~Nivel_1(){
     if(jugadores==2) delete player_2;
 }
 
-
 void Nivel_1::nivel_2(){
     //cambios para que el nivel concuerde con la ecena y suba la dificultad
     player->setPos(20,30);
     xmap=1182;
     ymap=321;
     yvi=ymap;
-    fric=0.7;
+    fric=1.7;
+    nive=2;
     view->resize(xvi,yvi+20);
     this->resize(xvi,yvi+20);
     scene->setSceneRect(0,0,xmap,ymap);
@@ -71,7 +120,8 @@ void Nivel_1::nivel_2(){
 void Nivel_1::nivel_3(){
     //cambios para que el nivel concuerde con la ecena y suba la dificultad
     player->setPos(371,187);
-    enemi+=5;
+    enemi+=15;
+    nive=3;
 }
 
 void Nivel_1::keyPressEvent(QKeyEvent *event){
@@ -79,19 +129,26 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
     if(jugadores==1){
         if(event->key() == Qt::Key_W)
             player->mover_personaje(0,-1,fric);
-            //player->setPos(player->x(),player->y()-10);
 
         if(event->key() == Qt::Key_S)
             player->mover_personaje(0,1,fric);
-            //player->setPos(player->x(),player->y()+10);
 
         if(event->key() == Qt::Key_A)
             player->mover_personaje(-1,0,fric);
-            //player->setPos(player->x()-10,player->y());
 
         if(event->key() == Qt::Key_D)
             player->mover_personaje(1,0,fric);
-            //player->setPos(player->x()+10,player->y());
+        //teclas para hallar ubicaciones
+        if(event->key() == Qt::Key_I)
+            player->setPos(player->x(),player->y()-1);
+        if(event->key() == Qt::Key_K)
+            player->setPos(player->x(),player->y()+1);
+        if(event->key() == Qt::Key_J)
+            player->setPos(player->x()-1,player->y());
+        if(event->key() == Qt::Key_L)
+            player->setPos(player->x()+1,player->y());
+        if(event->key()==Qt::Key_Space)
+            player->parar();
         if(event->key() == Qt::Key_G)
             guardar();
     }
@@ -123,6 +180,13 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
         if(event->key() == Qt::Key_H)
             guardar();
     }
+    //este es temporal para saber las ubicaciones de las paredes
+    if(event->key() == Qt::Key_P){
+        QMessageBox mensaje;
+        QString b="X: "+int2str(player->x())+"Y: "+int2str(player->y());
+        mensaje.setText(b);
+        mensaje.exec();
+    }
 }
 
 void Nivel_1::dos_jugadores(int skin_2){
@@ -131,31 +195,23 @@ void Nivel_1::dos_jugadores(int skin_2){
     player_2= new personaje;
     player_2->setSkin(skin_2);
     scene->addItem(player_2);
-    player_2->setPos(780,750);
+    if(nive==1)player_2->setPos(1990,1106);
+    else if(nive==2) player_2->setPos(50,30);
+    else player_2->setPos(371,227);
 
     barra_p2= new QGraphicsPixmapItem;
     barra_p2->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra_p2);
     barra_p2->setPos(player->x()-250,player->y()-270);
+    if(nive==2) barra_p2->setPos(30,10);
 
     //aumenta los enemigos al doble
     enemi*=2;
-    //inicio de enemigos
-    crear_enemigos();
-    crear_items();
-    //inicio los timers ahora para que si se reflejen los cambios del nivel
-    time_personje->start(10);
-    time_items->start(10);
 }
+
 void Nivel_1::setskin(int skin){
     //esta funcion la llama el menu para seleccionar la apariencia del personaje
     player->setSkin(skin);
-    //inicio de enemigos e items
-    crear_enemigos();
-    crear_items();
-    //inicio los timers ahora para que si se reflejen los cambios del nivel
-    time_personje->start(10);
-    time_items->start(10);
 }
 
 void Nivel_1::crear_enemigos(){
@@ -165,16 +221,30 @@ void Nivel_1::crear_enemigos(){
         enemys.push_back(new enemigos);
         enemys.back()->setPos(10+rand()%((xmap-30)-9),10+rand()%((ymap-30)-9));
         scene->addItem(enemys.back());
-
     }
 }
+
 void Nivel_1::crear_items(){
     //se crean los items de cura
+    int x,y;
+    bool ban;
+    QList <paredes>::iterator it;
     srand(time(NULL));
-    for(int i=0;i<enemi/2;i++){
+    for(int i=0;i<enemi/2;){
         itemss.push_back(new items);
-        itemss.back()->setPos(10+rand()%((xmap-20)-9),10+rand()%((ymap-20)-9));
-        scene->addItem(itemss.back());
+        x=10+rand()%((xmap-20)-9);
+        y=10+rand()%((ymap-20)-9);
+        ban=1;
+        for(it=Lparedes.begin();it!=Lparedes.end();it++){
+            if((*it).contacto(x,y,20,20)){
+                ban=0;
+                break;}
+        }
+        if(ban){
+            itemss.back()->setPos(x,y);
+            scene->addItem(itemss.back());
+            i++;
+        }
     }
 }
 
@@ -182,43 +252,41 @@ void Nivel_1::act_per(){
     //esta funcion actualiza al personaje y a los enemigos
     int dx=player->x(),dy=player->y();
     QList <enemigos *>::iterator it=enemys.begin();
-    player->actualizar(xmap,ymap);
+    player->actualizar(Lparedes,xmap,ymap);
     if(jugadores==2){
-        player_2->actualizar(xmap,ymap);
+        player_2->actualizar(Lparedes,xmap,ymap);
         dx=(abs(player->x())+abs(player_2->x()))/2;
         dy=(abs(player->y())+abs(player_2->y()))/2;
     }
     //actualizo la vista y la barra de vida para que enfoquen al jugador o los jugadores
     view->centerOn(dx,dy);
-    if((dx>380 && dx<xmap-380)){
-        barra->setPos(dx-200,barra->y());
-        if(jugadores==2) barra_p2->setPos(dx-(xvi/2),barra->y());
+    if((dx>(xvi/2) && dx<xmap-380)){
+        barra->setPos(dx-250,barra->y());
+        if(jugadores==2) barra_p2->setPos(dx-250,barra_p2->y());
     }
     if(dy>280 && dy<ymap-280){
-        barra->setPos(barra->x(),dy+(yvi/2));
-        if(jugadores==2) barra_p2->setPos(barra->x(),dy-(yvi/2));
+        barra->setPos(barra->x(),dy+(yvi/2)-40);
+        if(jugadores==2) barra_p2->setPos(barra_p2->x(),dy-(yvi/2)+40);
     }
 
     //en este ciclo se maneja el movimiento de los enemigos cuando son 2 jugadores
     if(jugadores==2){
         for(;it!=enemys.end();it++){
-            if((abs(dx-(*it)->x()))<400 && (abs(dy-(*it)->y()))<300){
                 dx=sqrt(pow(player->x()+12-(*it)->x(),2)+pow(player->y()+20-(*it)->y(),2));
                 dy=sqrt(pow(player_2->x()+12-(*it)->x(),2)+pow(player_2->y()+20-(*it)->y(),2));
                 if(dx>dy)
                     (*it)->mover(player_2->x(),player_2->y());
                 else
                     (*it)->mover(player->x(),player->y());
-                if((*it)->toque(player_2->x(),player_2->y())){
-                    player_2->setVida(player_2->getVida()-10);
-                    scene->removeItem((*it));
-                    (*it)->setPos(10000,10000);}
-                if((*it)->toque(player->x(),player->y())){
-                    player->setVida(player->getVida()-10);
-                    scene->removeItem((*it));
-                    (*it)->setPos(10000,10000);}
-                act_barra();
-            }
+            if((*it)->toque(player_2->x(),player_2->y())){
+                player_2->setVida(player_2->getVida()-10);
+                scene->removeItem((*it));
+                (*it)->setPos(10000,10000);}
+            if((*it)->toque(player->x(),player->y())){
+                player->setVida(player->getVida()-10);
+                scene->removeItem((*it));
+                (*it)->setPos(10000,10000);}
+            act_barra();
         }
     }
     //en este ciclo se maneja el movimiento de los enemigos cuando es un jugador
@@ -240,6 +308,60 @@ void Nivel_1::act_per(){
     }
 
 }
+void Nivel_1::guardar()
+{
+    nombre= a_jugar1->name;
+    qDebug()<<nombre;
+    // Variables para trabajar con ficheros
+    ofstream aux;
+    //traer vida y posición del personaje
+    int Vidas=player->getVida();
+    int posx= player->x();
+    int posy= player->y();
+    int skin1= player->getSkin();
+    int Nivel= nive;
+    //para personaje2
+    int Vidas2=player_2->getVida();
+    int posx2= player_2->x();
+    int posy2= player_2->y();
+    int skin2= player_2->getSkin();
+    ostringstream nameplayer;
+    nameplayer<< nombre.toStdString() << ".txt";
+    aux.open(nameplayer.str().c_str(),ios::out|ios::trunc); //Se abre fichero;
+
+    if(aux.is_open()){ //Si se encuentra el jugador
+        //Se escribe en el archivo
+        aux<<"Nivel "<<Nivel<<endl;
+        aux<<"Jugadores "<<jugadores<<endl;
+        aux<<"Skin "<<skin1<<endl;
+        aux<<"PosX "<<setprecision(2)<<posx<<endl;
+        aux<<"PosY "<<setprecision(2)<<posy<<endl;
+        aux<<"Vida "<<Vidas<<endl;
+        qDebug()<<"Posición en x"<<posx<<endl;
+        qDebug()<<"Posición en y"<<posy<<endl;
+        qDebug()<<"vida"<<Vidas<<endl;
+        qDebug()<<"skin"<<skin1<<endl;
+        //Se cierran los archivos
+
+        if (jugadores==2){
+            //Se escribe en el archivo
+            aux<<"Skin "<<skin2<<endl;
+            aux<<"PosX "<<setprecision(2)<<posx2<<endl;
+            aux<<"PosY "<<setprecision(2)<<posy2<<endl;
+            aux<<"Vida "<<Vidas2<<endl;
+            //qDebug()<<"jugador"<<jugador<<endl;
+            //Se cierran los archivos
+        }
+        aux<<"enemys "<<enemys.length()<<endl;
+        for(auto it=enemys.begin(); it!=enemys.end(); ++it){
+            aux<<(*it)->x()<<"  "<<(*it)->y()<<endl;
+        }
+        aux.close();
+    }
+
+
+}
+
 
 void Nivel_1::act_items(){
     QList <items *>::iterator it=itemss.begin();
@@ -261,210 +383,69 @@ void Nivel_1::act_items(){
     //este if es el que le avisa al programa que el jugador se ha quedado sin vida
     if(player->getVida()<=0 && !dead){
         QMessageBox mensaje;
-        mensaje.setText("Perdiste jugador 1");
+        mensaje.setText("Perdiste judor 1");
         mensaje.exec();
         scene->removeItem(player);
-        player->setPos(20000,20000);
-        dead=1;
+        time_items->stop();
+        time_personje->stop();
     }
-    if(jugadores==2){
+    if(jugadores==2 && !dead){
         if(player_2->getVida()<=0){
             QMessageBox mensaje;
             mensaje.setText("Perdiste jugador 2");
             mensaje.exec();
             scene->removeItem(player);
-            player_2->setPos(20000,20000);
+            time_items->stop();
+            time_personje->stop();
+        }
+    }
+
+    if(nive==1){
+        if(player->x()>338 && player->x()<430 && player->y()>164 && player->y()<198){
+            player->setPos(20000,20000);
+            Nivel_1 *a= new Nivel_1;
+            (*a).nivel_2();
+            (*a).setskin(player->getSkin());
+            (*a).player->setVida(player->getVida());
+            if(jugadores==2){
+                player_2->setPos(20000,20000);
+                (*a).dos_jugadores(player_2->getSkin());
+                (*a).player_2->setVida(player_2->getVida());}
+            (*a).cargar_nivel();
+            this->close();
+            (*a).show();
+        }
+    }
+    else if(nive==2){
+        if(player->x()>1044 && player->x()<1098 && player->y()<28){
+            player->setPos(20000,20000);
+            Nivel_1 *a=new Nivel_1;
+            (*a).nivel_3();
+            (*a).setskin(player->getSkin());
+            (*a).player->setVida(player->getVida());
+            if(jugadores==2){
+                player_2->setPos(20000,20000);
+                (*a).dos_jugadores(player_2->getSkin());
+                (*a).player_2->setVida(player_2->getVida());}
+            (*a).cargar_nivel();
+            this->close();
+            (*a).show();
+        }
+    }
+    else{
+        if(player->x()>1934 && player->x()<1993 && player->y()>1079 && player->y()<1103){
+            time_items->stop();
+            time_personje->stop();
+            QList <enemigos *>::iterator eli;
+            for(eli=enemys.begin();eli!=enemys.end();eli++)
+                scene->removeItem(*eli);
+            enemys.clear();
+            QMessageBox mensaje;
+            mensaje.setText("Has sobrevivido al virus");
+            mensaje.exec();
         }
     }
 }
-//int Nivel_1::realAngle(int vx_, int vy_)
-//{
-//    //Indicar el ángulo con el que sale una bala
-//    if(vx_ == 0){
-//        if(vy_ > 0){
-//            return 180;
-//        }
-//        else{
-//            return 0;
-//        }
-//    }
-//    else if(vy_ == 0){
-//        if(vx_ > 0){
-//            return 90;
-//        }
-//        else{
-//            return -90;
-//        }
-//    }
-//    else{
-//        if(vx_ > 0 && vy_ > 0){
-//            return 90+(atan2(vy_,vx_))*grados;
-//        }
-//        else if(vx_ < 0 && vy_ < 0){
-//            return 90+((atan2(vy_,vx_))*grados);
-//        }
-//        else{
-//            if(vx_ < 0 && vy_ > 0){
-//                return -270+((atan2(vy_,vx_))*grados);
-//            }
-//            return 90-((atan2(vy_,vx_))*grados)*-1;
-//        }
-//    }
-//}
-
-//bool Nivel_1::cargar()
-//{
-//    QString info;
-//    QString usuario;
-//    QString nivel;
-//    QString vida;
-//    QString puntaje;
-//    QFile file("Partidas");                   //Objeto para manejar la lectura del archivo
-//    file.open(QIODevice::ReadOnly);           //Abre el archivo en modo lectura
-//    info=file.readAll();
-
-//    int n=0;
-//    while(n<file.size()){
-//        if(info.at(n) != '\n' && info.at(n) != ' '){
-//            usuario+=info.at(n);
-//        }
-//        else{
-//            if(usuario == user){
-//                nivel = info.at(++n);
-//                level = nivel.toInt();
-//                n+=2;
-//                while(info.at(n) != ' '){
-//                    vida+=info.at(n);
-//                    n++;
-//                }
-//                salud->setSalud(vida.toInt());
-//                n++;
-//                while(info.at(n) != ' ' && info.at(n) != '\n'){
-//                    puntaje+=info.at(n);
-//                    n++;
-//                }
-//                score->setScore(puntaje.toInt());
-//                return true;
-//            }
-//            usuario="";
-//        }
-//        n++;
-//    }
-//    return false;
-//}
-
-void Nivel_1::guardar()
-{
-    nombre =a_jugar1->name;
-    qDebug()<<nombre;
-    // Variables para trabajar con ficheros
-    ofstream aux;
-    //traer vida y posición del personaje
-    int Vidas=player->getVida();
-    int posx= player->x();
-    int posy= player->y();
-    int skin1= player->getSkin();
-    //para personaje2
-    int Vidas2=player_2->getVida();
-    int posx2= player_2->x();
-    int posy2= player_2->y();
-    int skinx1= player_2->getSkin();
-    int skin2= player_2->getSkin();
-    ostringstream nameplayer;
-    nameplayer<< nombre.toStdString() << ".txt";
-    aux.open(nameplayer.str().c_str(),ios::out|ios::trunc); //Se abre fichero;
-
-    if(aux.is_open()){ //Si se encuentra el jugador
-            //Se escribe en el archivo 
-           aux<<"Jugadores"<<jugadores<<endl;
-           //aux<<"Nivel"<<;
-           aux<<"Skin"<<skin1<<endl;
-           aux<<"PosX"<<setprecision(2)<<posx<<endl;
-           aux<<"PosY"<<setprecision(2)<<posy<<endl;
-           aux<<"Vida"<<Vidas<<endl;
-           qDebug()<<"Posición en x"<<posx<<endl;
-           qDebug()<<"Posición en y"<<posy<<endl;
-           qDebug()<<"vida"<<Vidas<<endl;
-           qDebug()<<"skin"<<skin1<<endl;
-            //Se cierran los archivos
-
-    if (jugadores==2){
-            //Se escribe en el archivo
-        aux<<"Skin2"<<skin1<<endl;
-        aux<<"PosX"<<setprecision(2)<<posx<<endl;
-        aux<<"PosY"<<setprecision(2)<<posy<<endl;
-        aux<<"Vida"<<Vidas<<endl;
-            aux<<left<<skinx1<<setw(13)<<posx<<setw(7)<<setprecision(2)<<right<<posy<<setw(7)<<setprecision(2)<<right<< Vidas<<setw(7)<<setprecision(2)<<right<<endl;
-            aux<<left<<skin2<<setw(13)<<posx2<<setw(7)<<setprecision(2)<<right<<posy2<<setw(7)<<setprecision(2)<<right<< Vidas2<<setw(7)<<setprecision(2)<<right<<endl;
-            //qDebug()<<"jugador"<<jugador<<endl;
-            //Se cierran los archivos
-            }
-        }
-    aux.close();
-
-}
-
-//    QFile archivo(texto); //leer el archivo
-//        if(!archivo.open(QFile::ReadOnly)) //condicion que pregunta si no lo pudo abrir
-//        {
-//            QMessageBox::warning(this,"UUYYYY :V","ERROR AL ABRIR EL ARCHIVO"); //mensaje que dice que no se pudo leer
-//        }
-//        QTextStream in(&archivo); //crear un flujo de lectura
-//        texto=in.readAll(); //leer todo el archivo
-//        QStringList lista_archivo=texto.split(QLatin1Char(',')); //crear una lista de
-//        archivo.close(); //cerrar el archivo
-//        int nivel=0; //iniciari variable nivel
-//        for(int i=0;i<lista_archivo.size();i++) //ciclo que recorre toda la lista
-//        {
-//            if(i==0){vidas->setVidas(lista_archivo.at(0).toInt());} //dar el valor de vidas
-//            if(i==1){probabilidad->setTope(lista_archivo.at(1).toInt());} //dar el valor de probabilidad
-//            if(i==2){nivel=lista_archivo.at(2).toInt();} //dar el valor del nivel
-//        }
-//    QString info;
-//    QString usuario;
-//    QFile file("Partidas");                       //Objeto para manejar la lectura y escritura del archivo
-//    file.open(QIODevice::ReadWrite);           //Abre el archivo en modo lectura/escritura
-//    info=file.readAll();
-
-//    int n = 0;
-//    while(n<file.size()){
-//        if(info.at(n) != '\n' && info.at(n) != ' '){
-//            usuario+=info.at(n);
-//        }
-//        else{
-//            if(usuario == user){
-//                return false;
-//            }
-//            usuario="";
-//        }
-//        n++;
-//    }
-
-//    QTextStream stream(&file);
-//    stream << user << " " << level << " " << salud->getSalud() << " " << score->getScore() << endl;
-//    file.close();
-//    return true;
-
-
-//void Nivel_1::mousePressEvent(QMouseEvent *event)
-//{
-//    //Contar defensa gastadas
-//    player->incrementardefensa();
-//    float rotationdeg = player->getRotation();
-//    //Crear una nueva bala
-//    antibacterias* defensa = new antibacterias();
-//    float x1 = player->x()+(cos(rotationdeg*3.1416/180)) + 15;
-//    float y1 = player->y()+(sin(rotationdeg*3.1416/180)) + 27;
-//    defensa->setPos(x1, y1);
-//    defensa->direcciones(x1, y1,(sin(rotationdeg*3.1416/180))*300 , (-cos(rotationdeg*3.1416/180))*300);
-//    defensa->setRotation(rotationdeg);
-//    scene->addItem(defensa);
-//}
-
-//void Nivel_1::mouseMoveEvent(QMouseEvent *event)
-//{
-//    player->rotate(event->x()+x11 - player->x(), event->y()+y11 - player->y());
-//}
 
 void Nivel_1::act_barra(){
     //esta funcion cambia la imagen de la barra de vida dependiendo de la salud del personaje
@@ -518,6 +499,63 @@ void Nivel_1::act_barra(){
 }
 }
 
+void Nivel_1::cargar_paredes(){
+    string arch="paredes_n_1.txt",name,salida, s2;
+    char s;
+    int temp[4],pos=0;
+    long long int tam;
+    if(nive==2) arch="paredes_n_2.txt";
+    fstream k_1(arch, ios::in | ios::ate);
+    tam=k_1.tellg();
+    k_1.close();
+    fstream k(arch.c_str(), ios::in | ios::binary);
+    for(long long int i=0;i<tam;i++){
+        k.get(s);
+        salida.push_back(s);
+    }
+    k.close();
+    for(unsigned long int i=0;i<tam;i++){
+        s=salida[i];
+        if(salida[i]==',' || salida[i]=='\r'){
+            temp[pos]=(str2int(name));
+            name="";
+            pos++;
+        }
+        else if(salida[i]=='\n'){
+            Lparedes.push_back(paredes(temp[0],temp[1],temp[2],temp[3]));
+            pos=0;
+        }
+        else
+            name.push_back(salida[i]);
+    }
+}
+
+void Nivel_1::cargar_nivel(){
+    //inicio de enemigos e items
+    cargar_paredes();
+    crear_enemigos();
+    crear_items();
+    if(nive==3){
+        QList <enemigos *>::iterator eli=enemys.begin();
+        for(;eli!=enemys.end();eli++)
+            (*eli)->setVel((*eli)->getVel()*2);
+    }
+    //inicio los timers ahora para que si se reflejen los cambios del nivel
+    time_personje->start(10);
+    time_items->start(10);
+}
+
+long Nivel_1::str2int(string a){
+    int b,l,d=1,c=0;
+    l=a.length();
+    for(int i=l-1;i>=0;i--){
+        b=a[i]-48;
+        c+=b*d;
+        d*=10;
+    }
+    return c;
+}
+
 QString Nivel_1::int2str(long a){
     int c=0,i=1;
     char e;
@@ -532,8 +570,3 @@ QString Nivel_1::int2str(long a){
     }
     return b;
 }
-//void Nivel_1::decrementarenemigos()
-//{
-//    numEnemigos--;
-//}
-

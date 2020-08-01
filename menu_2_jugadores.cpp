@@ -99,22 +99,29 @@ void menu_2_jugadores::on_bot_nil_1_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
     level1->setskin(skin_1);
     level1->dos_jugadores(skin_2);
+    level1->cargar_nivel();
     level1->show();
     this->close();
 }
 
 void menu_2_jugadores::on_bot_nil_2_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level1->nivel_2();
     level1->setskin(skin_1);
     level1->dos_jugadores(skin_2);
+    level1->cargar_nivel();
+
     level1->show();
     this->close();
 }
 
 void menu_2_jugadores::on_bot_nil_3_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+
+    level1->nivel_3();
     level1->setskin(skin_1);
     level1->dos_jugadores(skin_2);
+    level1->cargar_nivel();
     level1->show();
     this->close();
 }

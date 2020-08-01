@@ -24,7 +24,9 @@ SOURCES += \
     main.cpp \
     menu.cpp \
     menu_2_jugadores.cpp \
+    menucargar.cpp \
     nivel_1.cpp \
+    paredes.cpp \
     personaje.cpp
 
 HEADERS += \
@@ -35,7 +37,9 @@ HEADERS += \
     items.h \
     menu.h \
     menu_2_jugadores.h \
+    menucargar.h \
     nivel_1.h \
+    paredes.h \
     personaje.h
 
 FORMS += \
@@ -43,6 +47,7 @@ FORMS += \
     inicio_acceso.ui \
     menu.ui \
     menu_2_jugadores.ui \
+    menucargar.ui \
     nivel_1.ui
 
 # Default rules for deployment.

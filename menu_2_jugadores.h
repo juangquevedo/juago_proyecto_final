@@ -19,10 +19,6 @@ public:
     explicit menu_2_jugadores(QWidget *parent = nullptr);
     ~menu_2_jugadores();
 
-    //variable para definir la apariencia del personaje
-    int skin_1=0;
-    int skin_2=0;
-
 private slots:
     void on_but_ski_1_play_1_clicked();
 
@@ -46,6 +42,9 @@ private:
     Ui::menu_2_jugadores *ui;
     //carga de los niveles
     Nivel_1 *level1;
+
+    //variable para definir la apariencia del personaje
+    int skin_1=0,skin_2=0;
 
 };
 
