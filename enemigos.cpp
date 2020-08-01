@@ -24,6 +24,18 @@ void enemigos::mover(int px, int py){
     else setPos(this->x()+x,this->y()+y);
 }
 
+bool enemigos::toque(int px, int py){
+    bool temp;
+    for(int i=this->y();i<this->y()+30;i++){
+        temp=(i>=py && i<=(py+40));
+        for(int j=this->x();j<(this->x()+30);j++){
+            if(temp && j>=px && j<=(px+25))
+                return 1;
+        }
+    }
+    return 0;
+}
+
 void enemigos::setVel(double nvx){
     vel=nvx;
 }

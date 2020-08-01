@@ -5,9 +5,6 @@ Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
     ui->setupUi(this);
 
     level1= new Nivel_1;
-    level1->setskin(2);
-    level1->show();
-    this->close();
 
     //se desabilita los botones para no causar errores
     ui->bot_nil_1->setEnabled(false);
@@ -24,20 +21,25 @@ Menu::~Menu(){
 void Menu::on_bot_nil_1_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
     level1->setskin(skin);
+    level1->cargar_nivel();
     level1->show();
     this->close();
 }
 
 void Menu::on_bot_nil_2_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level1->nivel_2();
     level1->setskin(skin);
+    level1->cargar_nivel();
     level1->show();
     this->close();
 }
 
 void Menu::on_bot_nil_3_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    level1->nivel_3();
     level1->setskin(skin);
+    level1->cargar_nivel();
     level1->show();
     this->close();
 }

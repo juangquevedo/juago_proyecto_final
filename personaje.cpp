@@ -4,7 +4,8 @@ personaje::personaje(){
     setPixmap(QPixmap(":/new/prefix1/Imagenes/skin_1.png").scaled(25,40));
 }
 
-void personaje::setSkin(int skin){
+void personaje::setSkin(int nskin){
+    skin=nskin;
     //estas son las apariencias que puede tener el personaje
     switch (skin){
     case 1:
@@ -28,24 +29,27 @@ void personaje::mover_personaje(int Fx, int Fy, double cf){
     double p=masa*9.8;
     fric=cf*p;
     if(Fx<0)
-        Ax=((Fx*p*100)+fric)/masa;
+        Ax=((Fx*p*60)+fric)/masa;
     else if (Fx>0)
-        Ax=((Fx*p*100)-fric)/masa;
+        Ax=((Fx*p*60)-fric)/masa;
     if(Fy<0)
-        Ay=((Fy*p*100)+fric)/masa;
+        Ay=((Fy*p*60)+fric)/masa;
     if(Fy>0)
-        Ay=((Fy*p*100)-fric)/masa;
+        Ay=((Fy*p*60)-fric)/masa;
 }
 
-void personaje::actualizar(){
+void personaje::actualizar(QList<paredes> Lparedes,int xmap, int ymap){
     //esta funcion calcula la friccion de donde se encuentre el personaje
-    //y calcula el movimiento del personaje
+    //y calcula el movimiento del personaje, no permite que se salga del mapa
     double x=(this->x()),y=(this->y());
     Vx=Ax*t;
     Vy=Ay*t;
-    x+=(Vx*t)+(0.5*Ax*pow(t,2));
-    y+=(Vy*t)+(0.5*Ay*pow(t,2));
-    this->setPos(x,y);
+    x+=(Vx*t*1.5)+(0.5*Ax*pow(t,2));
+    y+=(Vy*t*1.5)+(0.5*Ay*pow(t,2));
+    if(x>0 && x<xmap-25 && !choque(Lparedes,x,this->y()))
+        this->setPos(x,this->y());
+    if(y>0 && y<ymap-40 && !choque(Lparedes,this->x(),y))
+        this->setPos(this->x(),y);
     if(Ax<0)
         Ax+=fric/masa;
     else if(Ax>0)
@@ -56,12 +60,30 @@ void personaje::actualizar(){
         Ay-=fric/masa;
 }
 
+bool personaje::choque(QList<paredes> Lparedes,int px,int py){
+    QList<paredes>::iterator it=Lparedes.begin();
+    for(;it!=Lparedes.end();it++){
+        if((*it).contacto(px,py,25,40))
+            return 1;
+    }
+    return 0;
+}
+
 void personaje::setVida(int nv){
     vida=nv;
 }
 
+void personaje::parar(){
+    Ax=0;
+    Ay=0;
+}
+
 int personaje::getVida(){
     return vida;
+}
+
+int personaje::getSkin(){
+return skin;
 }
 
 

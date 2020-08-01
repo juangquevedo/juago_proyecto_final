@@ -1,5 +1,5 @@
 #include "menu.h"
-#include "nivel_1.h"
+#include "menu_2_jugadores.h"
 
 #include <QApplication>
 

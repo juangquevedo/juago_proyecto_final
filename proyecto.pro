@@ -17,19 +17,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     enemigos.cpp \
+    items.cpp \
     main.cpp \
     menu.cpp \
+    menu_2_jugadores.cpp \
     nivel_1.cpp \
+    paredes.cpp \
     personaje.cpp
 
 HEADERS += \
     enemigos.h \
+    items.h \
     menu.h \
+    menu_2_jugadores.h \
     nivel_1.h \
+    paredes.h \
     personaje.h
 
 FORMS += \
     menu.ui \
+    menu_2_jugadores.ui \
     nivel_1.ui
 
 # Default rules for deployment.
