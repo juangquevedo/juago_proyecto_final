@@ -35,7 +35,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/icono_nivel_1.png);</string>
+          <string notr="true">background-image: url(:/Imagenes/mapa pokemon.jpg);</string>
          </property>
          <property name="text">
           <string/>
@@ -83,8 +83,11 @@
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-image: url(:/Imagenes/mapa edificio.png);</string>
+         </property>
          <property name="text">
-          <string>sin diseño</string>
+          <string/>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -108,7 +111,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/icono_nivel_3.png);</string>
+          <string notr="true">background-image: url(:/Imagenes/mapa pokemon noche.jpg);</string>
          </property>
          <property name="text">
           <string/>
@@ -238,7 +241,7 @@
      <x>0</x>
      <y>0</y>
      <width>1097</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
