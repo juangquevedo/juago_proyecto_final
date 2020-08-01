@@ -1,7 +1,9 @@
 #include "items.h"
 
 items::items(){
-    setPixmap(QPixmap(":/new/prefix1/Imagenes/anti-bacterial.png").scaled(20,20));
+
+    setPixmap(QPixmap(":/Imagenes/anti-bacterial.png").scaled(20,20));
+
 }
 
 void items::setcura(int c){

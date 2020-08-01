@@ -45,6 +45,7 @@ private:
 
     //variable para definir la apariencia del personaje
     int skin_1=0,skin_2=0;
+
 };
 
 #endif // MENU_2_JUGADORES_H

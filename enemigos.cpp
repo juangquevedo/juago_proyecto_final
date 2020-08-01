@@ -2,7 +2,7 @@
 
 enemigos::enemigos(){
     //inicio de la imagen del enemigo
-    setPixmap(QPixmap(":/new/prefix1/Imagenes/virus.png").scaled(30,30));
+    setPixmap(QPixmap(":/Imagenes/virus.png").scaled(30,30));
 }
 
 void enemigos::mover(int px, int py){

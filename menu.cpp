@@ -1,4 +1,4 @@
-#include "menu.h"
+    #include "menu.h"
 #include "ui_menu.h"
 
 Menu::Menu(QWidget *parent): QMainWindow(parent), ui(new Ui::Menu){
@@ -20,6 +20,7 @@ Menu::~Menu(){
 
 void Menu::on_bot_nil_1_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+    //level1->guardar(skin,0,0);
     level1->setskin(skin);
     level1->cargar_nivel();
     level1->show();
@@ -28,6 +29,7 @@ void Menu::on_bot_nil_1_clicked(){
 
 void Menu::on_bot_nil_2_clicked(){
     //llama la funcion de escoger la apariencia del personaje y luego cargar el nivel
+
     level1->nivel_2();
     level1->setskin(skin);
     level1->cargar_nivel();

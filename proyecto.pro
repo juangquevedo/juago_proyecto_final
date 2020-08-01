@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -16,27 +16,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    a_jugar.cpp \
+    antibacterias.cpp \
     enemigos.cpp \
+    inicio_acceso.cpp \
     items.cpp \
     main.cpp \
     menu.cpp \
     menu_2_jugadores.cpp \
+    menucargar.cpp \
     nivel_1.cpp \
     paredes.cpp \
     personaje.cpp
 
 HEADERS += \
+    a_jugar.h \
+    antibacterias.h \
     enemigos.h \
+    inicio_acceso.h \
     items.h \
     menu.h \
     menu_2_jugadores.h \
+    menucargar.h \
     nivel_1.h \
     paredes.h \
     personaje.h
 
 FORMS += \
+    a_jugar.ui \
+    inicio_acceso.ui \
     menu.ui \
     menu_2_jugadores.ui \
+    menucargar.ui \
     nivel_1.ui
 
 # Default rules for deployment.
@@ -45,4 +56,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    imagenes.qrc
+    audios.qrc \
+    imagenes.qrc \
+    images.qrc
+
+DISTFILES += \
+    Imagenes/fondo_escena.PNG

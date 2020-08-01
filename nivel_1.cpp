@@ -1,6 +1,11 @@
 #include "nivel_1.h"
 #include "ui_nivel_1.h"
+#include "a_jugar.h"
+#include "menu.h"
+#include "menu_2_jugadores.h"
+#include <iomanip>
 
+extern a_jugar *a_jugar1;
 Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     ui->setupUi(this);
 
@@ -8,7 +13,7 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     scene= new QGraphicsScene(this);
     view= new QGraphicsView(this);
     scene->setSceneRect(0,0,xmap,ymap);
-    scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
     view->setScene(scene);
     view->resize(xvi,yvi);
     this->resize(xvi,yvi);
@@ -32,12 +37,62 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
 
     //inicio de la barra de vida
     barra= new QGraphicsPixmapItem;
-    barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
+    barra->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra);
     barra->setPos(player->x()-250,player->y()+150);
 
 }
 
+Nivel_1::Nivel_1(int jugadores, int nivel, vector<int> &vidas,vector<float> &posxs,vector<float> &posys,vector<int> &skins, QWidget *parent): QMainWindow(parent),ui(new Ui::Nivel_1){
+    ui->setupUi(this);
+
+    //inicio de la escena y la vista
+    scene= new QGraphicsScene(this);
+    view= new QGraphicsView(this);
+    scene->setSceneRect(0,0,xmap,ymap);
+    player= new personaje;
+    barra= new QGraphicsPixmapItem;
+    if (nivel==1 || nivel==3){
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa pokemon.jpg").scaled(2560,1280)));
+    view->setScene(scene);
+    view->resize(xvi,yvi);
+    this->resize(xvi,yvi);}
+    else if(nivel==2){nivel_2();}
+
+    //inicio del personaje
+    //jugadores=1;
+    player->setSkin(skins[0]);
+    player->setPos(posxs[0],posys[0]);
+    scene->addItem(player);
+    view->centerOn(player->x(),player->y());
+    player->setVida(vidas[0]);
+    if (jugadores==2){
+    player_2= new personaje;
+    barra_p2= new QGraphicsPixmapItem;
+    player_2->setSkin(skins[1]);
+    player->setPos(posxs[1],posys[1]);
+    scene->addItem(player_2);
+    player->setVida(vidas[1]);
+      }
+
+    //timmers
+    time_personje= new QTimer;
+    time_items= new QTimer;
+
+    time_personje->stop();
+    time_items->stop();
+    connect(time_personje,SIGNAL(timeout()),this,SLOT(act_per()));
+    connect(time_items,SIGNAL(timeout()),this,SLOT(act_items()));
+
+    //inicio de la barra de vida
+
+    act_barra();
+    scene->addItem(barra);
+    barra->setPos(player->x()-250,player->y()+150);
+    scene->addItem(barra_p2);
+    barra_p2->setPos(player->x()-250,player->y()-270);
+
+}
 Nivel_1::~Nivel_1(){
     delete ui;
     delete scene;
@@ -58,7 +113,7 @@ void Nivel_1::nivel_2(){
     view->resize(xvi,yvi+20);
     this->resize(xvi,yvi+20);
     scene->setSceneRect(0,0,xmap,ymap);
-    scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Imagenes/mapa edificio.png").scaled(xmap,ymap)));
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa edificio.png").scaled(xmap,ymap)));
     barra->setPos(100,yvi-30);
 }
 
@@ -94,6 +149,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
             player->setPos(player->x()+1,player->y());
         if(event->key()==Qt::Key_Space)
             player->parar();
+        if(event->key() == Qt::Key_G)
+            guardar();
     }
     //movimiento para cuando hay 2 jugadores
     else{
@@ -120,6 +177,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event){
 
         if(event->key() == Qt::Key_L)
             player_2->mover_personaje(1,0,fric);
+        if(event->key() == Qt::Key_H)
+            guardar();
     }
     //este es temporal para saber las ubicaciones de las paredes
     if(event->key() == Qt::Key_P){
@@ -141,7 +200,7 @@ void Nivel_1::dos_jugadores(int skin_2){
     else player_2->setPos(371,227);
 
     barra_p2= new QGraphicsPixmapItem;
-    barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
+    barra_p2->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra_p2);
     barra_p2->setPos(player->x()-250,player->y()-270);
     if(nive==2) barra_p2->setPos(30,10);
@@ -249,6 +308,60 @@ void Nivel_1::act_per(){
     }
 
 }
+void Nivel_1::guardar()
+{
+    nombre= a_jugar1->name;
+    qDebug()<<nombre;
+    // Variables para trabajar con ficheros
+    ofstream aux;
+    //traer vida y posición del personaje
+    int Vidas=player->getVida();
+    int posx= player->x();
+    int posy= player->y();
+    int skin1= player->getSkin();
+    int Nivel= nive;
+    //para personaje2
+    int Vidas2=player_2->getVida();
+    int posx2= player_2->x();
+    int posy2= player_2->y();
+    int skin2= player_2->getSkin();
+    ostringstream nameplayer;
+    nameplayer<< nombre.toStdString() << ".txt";
+    aux.open(nameplayer.str().c_str(),ios::out|ios::trunc); //Se abre fichero;
+
+    if(aux.is_open()){ //Si se encuentra el jugador
+        //Se escribe en el archivo
+        aux<<"Nivel "<<Nivel<<endl;
+        aux<<"Jugadores "<<jugadores<<endl;
+        aux<<"Skin "<<skin1<<endl;
+        aux<<"PosX "<<setprecision(2)<<posx<<endl;
+        aux<<"PosY "<<setprecision(2)<<posy<<endl;
+        aux<<"Vida "<<Vidas<<endl;
+        qDebug()<<"Posición en x"<<posx<<endl;
+        qDebug()<<"Posición en y"<<posy<<endl;
+        qDebug()<<"vida"<<Vidas<<endl;
+        qDebug()<<"skin"<<skin1<<endl;
+        //Se cierran los archivos
+
+        if (jugadores==2){
+            //Se escribe en el archivo
+            aux<<"Skin "<<skin2<<endl;
+            aux<<"PosX "<<setprecision(2)<<posx2<<endl;
+            aux<<"PosY "<<setprecision(2)<<posy2<<endl;
+            aux<<"Vida "<<Vidas2<<endl;
+            //qDebug()<<"jugador"<<jugador<<endl;
+            //Se cierran los archivos
+        }
+        aux<<"enemys "<<enemys.length()<<endl;
+        for(auto it=enemys.begin(); it!=enemys.end(); ++it){
+            aux<<(*it)->x()<<"  "<<(*it)->y()<<endl;
+        }
+        aux.close();
+    }
+
+
+}
+
 
 void Nivel_1::act_items(){
     QList <items *>::iterator it=itemss.begin();
@@ -337,52 +450,53 @@ void Nivel_1::act_items(){
 void Nivel_1::act_barra(){
     //esta funcion cambia la imagen de la barra de vida dependiendo de la salud del personaje
     if(player->getVida()>=100)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     else if(player->getVida()>=90 && player->getVida()<100)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 90%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 90%.png").scaled(500,20));
     else if(player->getVida()>=80 && player->getVida()<90)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 80%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 80%.png").scaled(500,20));
     else if(player->getVida()>=70 && player->getVida()<80)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 70%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 70%.png").scaled(500,20));
     else if(player->getVida()>=60 && player->getVida()<70)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 60%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 60%.png").scaled(500,20));
     else if(player->getVida()>=50 && player->getVida()<60)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 50%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 50%.png").scaled(500,20));
     else if(player->getVida()>=40 && player->getVida()<50)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 40%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 40%.png").scaled(500,20));
     else if(player->getVida()>=30 && player->getVida()<40)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 30%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 30%.png").scaled(500,20));
     else if(player->getVida()>=20 && player->getVida()<30)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 20%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 20%.png").scaled(500,20));
     else if(player->getVida()>=10 && player->getVida()<20)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 10%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 10%.png").scaled(500,20));
     else if(player->getVida()>=0 && player->getVida()<10)
-        barra->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 0%.png").scaled(500,20));
+        barra->setPixmap(QPixmap(":/Imagenes/barra 0%.png").scaled(500,20));
+
     //aqui se controla la barra del segundo jugador
     if(jugadores==2){
         if(player_2->getVida()>=100)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 100%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
         else if(player_2->getVida()>=90 && player_2->getVida()<100)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 90%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 90%.png").scaled(500,20));
         else if(player_2->getVida()>=80 && player_2->getVida()<90)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 80%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 80%.png").scaled(500,20));
         else if(player_2->getVida()>=70 && player_2->getVida()<80)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 70%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 70%.png").scaled(500,20));
         else if(player_2->getVida()>=60 && player_2->getVida()<70)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 60%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 60%.png").scaled(500,20));
         else if(player_2->getVida()>=50 && player_2->getVida()<60)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 50%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 50%.png").scaled(500,20));
         else if(player_2->getVida()>=40 && player_2->getVida()<50)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 40%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 40%.png").scaled(500,20));
         else if(player_2->getVida()>=30 && player_2->getVida()<40)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 30%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 30%.png").scaled(500,20));
         else if(player_2->getVida()>=20 && player_2->getVida()<30)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 20%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 20%.png").scaled(500,20));
         else if(player_2->getVida()>=10 && player_2->getVida()<20)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 10%.png").scaled(500,20));
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 10%.png").scaled(500,20));
         else if(player_2->getVida()>=0 && player_2->getVida()<10)
-            barra_p2->setPixmap(QPixmap(":/new/prefix1/Imagenes/barra 0%.png").scaled(500,20));
-    }
+            barra_p2->setPixmap(QPixmap(":/Imagenes/barra 0%.png").scaled(500,20));
+}
 }
 
 void Nivel_1::cargar_paredes(){

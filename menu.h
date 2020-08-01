@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QPixmap>
-
+#include "personaje.h"
 #include "nivel_1.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,6 +17,8 @@ class Menu : public QMainWindow
 public:
     Menu(QWidget *parent = nullptr);
     ~Menu();
+    //variable para definir la apariencia del personaje
+    int skin=0;
 
 private slots:
     //funciones de los botones
@@ -37,7 +39,6 @@ private:
     //carga de los niveles
     Nivel_1 *level1;
 
-    //variable para definir la apariencia del personaje
-    int skin=0;
+
 };
 #endif // MENU_H
