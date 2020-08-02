@@ -358,12 +358,12 @@ void Nivel_1::act_items(){
         }
         if(jugadores==2){
             if((*it)->toque(player_2->x(),player_2->y()) && player_2->getVida()<100){
-                player->setVida(player_2->getVida()+(*it)->getcura());
+                player_2->setVida(player_2->getVida()+(*it)->getcura());
                 (*it)->setPos(-10000,-10000);
             }
         }
-        act_barra();
     }
+    act_barra();
 
     //este if es el que le avisa al programa que el jugador se ha quedado sin vida
     if(player->getVida()<=0 && !dead){
