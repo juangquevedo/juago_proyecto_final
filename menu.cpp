@@ -75,3 +75,8 @@ void Menu::on_but_ski_3_clicked(){
     ui->bot_nil_3->setEnabled(true);
 }
 
+
+void Menu::on_pushButton_clicked()
+{
+
+}

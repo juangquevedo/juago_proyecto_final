@@ -55,7 +55,6 @@ public:
     //int realAngle(int vx_, int vy_);
     //int numEnemigos;
 
-    //bool cargar();
     void guardar();
     //Eventos
     //void mousePressEvent(QMouseEvent* event);

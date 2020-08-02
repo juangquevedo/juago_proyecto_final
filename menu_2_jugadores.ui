@@ -6,24 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1244</width>
-    <height>702</height>
+    <width>1136</width>
+    <height>777</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/Imagenes/fondo_person.PNG);</string>
+   <string notr="true">background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
   </property>
   <widget class="QWidget" name="widget">
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>20</y>
-      <width>741</width>
-      <height>321</height>
+      <x>250</x>
+      <y>120</y>
+      <width>701</width>
+      <height>341</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -37,10 +37,10 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg);</string>
+          <string notr="true">background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffff00;&quot;&gt;Jugador 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ff00;&quot;&gt;Jugador 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -57,7 +57,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_1.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_1.png</pixmap>
@@ -87,7 +87,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_2.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_2.png</pixmap>
@@ -114,7 +114,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_3.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_3.png</pixmap>
@@ -147,10 +147,10 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/inicio/fondo-coronavirus-verde-realista_52683-36592.jpg);</string>
+          <string notr="true">background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffff00;&quot;&gt;Jugador 2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00ff00;&quot;&gt;Jugador 2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -167,7 +167,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_1.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_1.png</pixmap>
@@ -197,7 +197,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_2.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_2.png</pixmap>
@@ -224,7 +224,7 @@
               <string notr="true">background-image: url(:/Imagenes/skin_3.png);</string>
              </property>
              <property name="text">
-              <string>                                      </string>
+              <string/>
              </property>
              <property name="pixmap">
               <pixmap>:/new/prefix1/Imagenes/skin_3.png</pixmap>
@@ -252,8 +252,8 @@
    <widget class="QWidget" name="layoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>360</y>
+      <x>270</x>
+      <y>470</y>
       <width>661</width>
       <height>231</height>
      </rect>
@@ -280,7 +280,8 @@
        <item>
         <widget class="QPushButton" name="bot_nil_1">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 127);</string>
+          <string notr="true">color: rgb(0, 255, 0);
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
          </property>
          <property name="text">
           <string>Nivel 1</string>
@@ -326,7 +327,8 @@
        <item>
         <widget class="QPushButton" name="bot_nil_2">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 255);</string>
+          <string notr="true">color: rgb(0, 255, 0);
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
          </property>
          <property name="text">
           <string>Nivel 2</string>
@@ -356,7 +358,8 @@
        <item>
         <widget class="QPushButton" name="bot_nil_3">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(3, 3, 181);</string>
+          <string notr="true">color: rgb(0, 255, 0);
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
          </property>
          <property name="text">
           <string>Nivel 3</string>
@@ -373,7 +376,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1244</width>
+     <width>1136</width>
      <height>22</height>
     </rect>
    </property>

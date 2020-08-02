@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>Imagenes/fondo_person.PNG</file>
         <file>Imagenes/anti-bacterial.png</file>
         <file>Imagenes/barra 0%.png</file>
         <file>Imagenes/barra 10%.png</file>
@@ -21,6 +20,6 @@
         <file>Imagenes/virus.png</file>
         <file>Imagenes/mapa edificio.png</file>
         <file>Imagenes/mapa pokemon.jpg</file>
-
+        <file>Imagenes/ajugarfondo.PNG</file>
     </qresource>
 </RCC>

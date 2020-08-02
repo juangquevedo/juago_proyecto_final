@@ -108,7 +108,7 @@
       <x>0</x>
       <y>0</y>
       <width>1361</width>
-      <height>651</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -141,11 +141,11 @@
     <property name="styleSheet">
      <string notr="true">selection-color: rgb(255, 63, 15);
 background-color: rgb(230, 36, 22);
-background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);
-color: rgb(255, 0, 0);</string>
+color: rgb(255, 0, 0);
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
     </property>
     <property name="text">
-     <string>iniciar</string>
+     <string>Iniciar</string>
     </property>
    </widget>
    <zorder>label</zorder>

@@ -10,6 +10,7 @@ a_jugar::a_jugar(QWidget *parent) :
     menu1 = new Menu() ;
     menu2 = new menu_2_jugadores();
 
+
 }
 
 a_jugar::~a_jugar()
@@ -74,14 +75,63 @@ void a_jugar::on_cargar_clicked()
     if(name!=""){
         ostringstream jugador1;
         jugador1<<name.toStdString() << ".txt";
-        ifstream f(jugador1.str().c_str());
+        ifstream file(jugador1.str().c_str());
 
-        bool exist = f.good();
+        bool exist = file.good();
         if (exist){
-            {ifstream (jugador1.str().c_str(), ios::out | ios::in);}
+            string element;
+            int nivel;
+            int jugadores;
+            vector<int> skins={};
+            vector<float> posxs={};
+            vector<float> posys={};
+            vector<int> vidas={};
+
+            while (file>>element){
+                if (element=="Nivel"){
+                    file>>nivel;
+                }
+                else if (element=="Jugadores") {
+                    file>>jugadores;
+                    for (int i=0; i<jugadores; i++ ) {
+                        while (file>>element){
+                        if (element=="Skin") {
+                            int skin=0;
+                            file>>skin;
+                            skins.push_back(skin);
+                        }
+                        else if (element=="PosX") {
+                            float posx=0.0;
+                            file>>posx;
+                            posxs.push_back(posx);
+                        }
+                        else if (element=="PosY") {
+                            float posy=0.0;
+                            file>>posy;
+                            posys.push_back(posy);
+                        }
+                        else if (element=="Vida") {
+                            int vida=0.0;
+                            file>>vida;
+                            vidas.push_back(vida);
+                            break;
+                        }
+                        }
+
+                    }
+
+                }
+                else if (element=="enemys") {
 
 
+                }
+           }
+
+         menucarga= new menucargar(jugadores, nivel, vidas,posxs,posys,skins);
+         menucarga->show();
+         this->close();
         }
+
         else{
                 QMessageBox mensaje;
                 mensaje.setText("¡No tienes una partida guardada!");
@@ -89,7 +139,6 @@ void a_jugar::on_cargar_clicked()
 
         }
     }
-
 
 //    if (read.is_open())
 //       {

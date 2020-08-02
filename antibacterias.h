@@ -21,10 +21,10 @@ public:
 
      //Atributos publicos
      QTimer* timer;
-public slots:
+//public slots:
 //     void moveBullet();
- private:
-     //Nivel_1 *nivel1;
+// private:
+//     Nivel_1 *nivel1;
 //     float sx;
 //     float sy;
 //     float vy;

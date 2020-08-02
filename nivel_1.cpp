@@ -570,3 +570,24 @@ QString Nivel_1::int2str(long a){
     }
     return b;
 }
+
+
+//void Nivel_1::mousePressEvent(QMouseEvent *event)
+//{
+//    //Contar defensa gastadas
+//    player->incrementardefensa();
+//    float rotationdeg = player->getRotation();
+//    //Crear una nueva bala
+//    antibacterias* defensa = new antibacterias();
+//    float x1 = player->x()+(cos(rotationdeg*3.1416/180)) + 15;
+//    float y1 = player->y()+(sin(rotationdeg*3.1416/180)) + 27;
+//    defensa->setPos(x1, y1);
+//    defensa->direcciones(x1, y1,(sin(rotationdeg*3.1416/180))*300 , (-cos(rotationdeg*3.1416/180))*300);
+//    defensa->setRotation(rotationdeg);
+//    scene->addItem(defensa);
+//}
+
+//void Nivel_1::mouseMoveEvent(QMouseEvent *event)
+//{
+//    player->rotate(event->x()+x11 - player->x(), event->y()+y11 - player->y());
+//}

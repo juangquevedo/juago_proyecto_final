@@ -34,6 +34,8 @@ private slots:
 
     void on_but_ski_3_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Menu *ui;
     //carga de los niveles
