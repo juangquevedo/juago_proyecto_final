@@ -111,7 +111,7 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/icono_nivel_3.png);</string>
+          <string notr="true">background-image: url(:/Imagenes/mapa pokemon noche.jpg);</string>
          </property>
          <property name="text">
           <string/>
@@ -256,8 +256,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1027</width>
-     <height>22</height>
+     <width>1097</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>
