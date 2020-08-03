@@ -24,6 +24,8 @@ public:
 private:
     //atributos
     double vel=0.4;
+    //float posx,posy;
+
 };
 
 #endif // ENEMIGOS_H

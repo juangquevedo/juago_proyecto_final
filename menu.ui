@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1097</width>
+    <width>1027</width>
     <height>700</height>
    </rect>
   </property>
@@ -17,14 +17,14 @@
    <string>Menu</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/Imagenes/fondo_person.PNG);</string>
+   <string notr="true">background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>360</y>
+      <x>410</x>
+      <y>350</y>
       <width>361</width>
       <height>281</height>
      </rect>
@@ -51,7 +51,7 @@
        <item>
         <widget class="QPushButton" name="bot_nil_1">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 127);</string>
+          <string notr="true">color: rgb(0, 255, 0);</string>
          </property>
          <property name="text">
           <string>Nivel 1</string>
@@ -97,7 +97,7 @@
        <item>
         <widget class="QPushButton" name="bot_nil_2">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 255);</string>
+          <string notr="true">color: rgb(0, 255, 0);</string>
          </property>
          <property name="text">
           <string>Nivel 2</string>
@@ -127,7 +127,7 @@
        <item>
         <widget class="QPushButton" name="bot_nil_3">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(3, 3, 181);</string>
+          <string notr="true">color: rgb(0, 255, 0);</string>
          </property>
          <property name="text">
           <string>Nivel 3</string>
@@ -141,8 +141,8 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>150</y>
+      <x>420</x>
+      <y>140</y>
       <width>337</width>
       <height>187</height>
      </rect>
@@ -233,6 +233,22 @@
       </layout>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>10</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/Imagenes/inicio/ayuda.PNG);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

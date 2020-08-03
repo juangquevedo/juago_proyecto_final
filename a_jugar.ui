@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1196</width>
-    <height>536</height>
+    <width>1076</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,8 +20,8 @@
    <widget class="QPushButton" name="un_jugador">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>220</y>
+      <x>490</x>
+      <y>210</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -40,7 +40,7 @@
 font: 75 20pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);
 selection-color: rgb(255, 0, 0);
-background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
     </property>
     <property name="text">
      <string>1 Jugador</string>
@@ -49,8 +49,8 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
    <widget class="QPushButton" name="dos_jugadores">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>300</y>
+      <x>490</x>
+      <y>280</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -69,7 +69,7 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
 font: 75 18pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);
 selection-color: rgb(255, 0, 0);
-background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
     </property>
     <property name="text">
      <string>2 Jugadores</string>
@@ -78,8 +78,8 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
    <widget class="QPushButton" name="cargar">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>380</y>
+      <x>490</x>
+      <y>350</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -98,7 +98,7 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
 font: 75 20pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);
 selection-color: rgb(255, 0, 0);
-background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
+background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
     </property>
     <property name="text">
      <string>Cargar</string>
@@ -110,11 +110,11 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
       <x>0</x>
       <y>0</y>
       <width>1201</width>
-      <height>501</height>
+      <height>531</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(:/Imagenes/fondo_person.PNG);</string>
+     <string notr="true">background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
     </property>
     <property name="text">
      <string/>
@@ -123,11 +123,14 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
    <widget class="QLabel" name="nombre">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>500</x>
       <y>150</y>
       <width>201</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(0, 255, 0);</string>
     </property>
     <property name="text">
      <string>Escribe un nombre para la partida</string>
@@ -136,7 +139,7 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
    <widget class="QLineEdit" name="inputname">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>500</x>
       <y>170</y>
       <width>161</width>
       <height>20</height>
@@ -155,7 +158,7 @@ background-image: url(:/Imagenes/inicio/PANDEMIA.PNG);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1196</width>
+     <width>1076</width>
      <height>22</height>
     </rect>
    </property>
