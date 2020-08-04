@@ -1,4 +1,5 @@
 #include "menu_2_jugadores.h"
+#include "aviso.h"
 #include "ui_menu_2_jugadores.h"
 
 menu_2_jugadores::menu_2_jugadores(QWidget *parent) : QMainWindow(parent),ui(new Ui::menu_2_jugadores){
@@ -124,4 +125,13 @@ void menu_2_jugadores::on_bot_nil_3_clicked(){
     level1->cargar_nivel();
     level1->show();
     this->close();
+}
+
+void menu_2_jugadores::on_pushButton_clicked()
+{
+    //boton de ayuda
+    aviso *b= new aviso;
+    (*b).mostrar();
+    (*b).show();
+
 }

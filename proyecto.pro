@@ -18,13 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     a_jugar.cpp \
     antibacterias.cpp \
+    aviso.cpp \
     enemigos.cpp \
     inicio_acceso.cpp \
     items.cpp \
     main.cpp \
     menu.cpp \
     menu_2_jugadores.cpp \
-    menucargar.cpp \
     nivel_1.cpp \
     paredes.cpp \
     personaje.cpp
@@ -32,18 +32,19 @@ SOURCES += \
 HEADERS += \
     a_jugar.h \
     antibacterias.h \
+    aviso.h \
     enemigos.h \
     inicio_acceso.h \
     items.h \
     menu.h \
     menu_2_jugadores.h \
-    menucargar.h \
     nivel_1.h \
     paredes.h \
     personaje.h
 
 FORMS += \
     a_jugar.ui \
+    aviso.ui \
     inicio_acceso.ui \
     menu.ui \
     menu_2_jugadores.ui \

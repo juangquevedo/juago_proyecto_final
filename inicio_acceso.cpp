@@ -14,8 +14,8 @@ inicio_acceso::inicio_acceso(QWidget *parent)
     ui->preg3->hide();
     ui->preg4->hide();
     soundrack = new QMediaPlayer;
-    soundrack-> setMedia(QUrl("qrc:/Audios/background-suspense-music-suspenseful-dramatic-film-soundtracks-anticipation.mp3"));
-    soundrack->setVolume(10);
+    soundrack-> setMedia(QUrl("qrc:/Audios/y2mate.com - CANCION DEL CORONAVIRUS (COVID-19)_p_mORIo7Aks.mp3"));
+    soundrack->setVolume(320);
     soundrack->play();
     fin = new QTimer(this);
     fin-> stop();
