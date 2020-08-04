@@ -15,7 +15,7 @@ inicio_acceso::inicio_acceso(QWidget *parent)
     ui->preg4->hide();
     soundrack = new QMediaPlayer;
     soundrack-> setMedia(QUrl("qrc:/Audios/y2mate.com - CANCION DEL CORONAVIRUS (COVID-19)_p_mORIo7Aks.mp3"));
-    soundrack->setVolume(320);
+    soundrack->setVolume(40);
     soundrack->play();
     fin = new QTimer(this);
     fin-> stop();

@@ -44,6 +44,10 @@ Nivel_1::Nivel_1(QWidget *parent) : QMainWindow(parent),ui(new Ui::Nivel_1){
     barra->setPixmap(QPixmap(":/Imagenes/barra 100%.png").scaled(500,20));
     scene->addItem(barra);
     barra->setPos(player->x()-250,player->y()+150);
+    //Inicializar sonidos
+    sound_antibacterial = new QMediaPlayer;
+    sound_bacteria = new QMediaPlayer;
+    sound_tos = new QMediaPlayer;
 
 }
 
@@ -290,20 +294,35 @@ void Nivel_1::act_per(){
             if((*it)->toque(player_2->x(),player_2->y())){
                 player_2->setVida(player_2->getVida()-10);
                 scene->removeItem((*it));
-                (*it)->setPos(10000,10000);}
+                (*it)->setPos(10000,10000);
+                sound_tos->setMedia(QUrl(":/Audios/tos_2.mp3"));
+                sound_tos->setVolume(390);
+                sound_tos->play();
+            }
             if((*it)->toque(player->x(),player->y())){
                 player->setVida(player->getVida()-10);
                 scene->removeItem((*it));
-                (*it)->setPos(10000,10000);}
+                (*it)->setPos(10000,10000);
+                sound_tos->setMedia(QUrl(":/Audios/tos_2.mp3"));
+                sound_tos->setVolume(390);
+                sound_tos->play();}
             act_barra();
 
+            //for para remover el personaje cuando la gota lo toca.
             for(;it1!=defensas.end();it1++){
                 qreal xdef= (*it1)->getPosx_defensa();
                 qreal ydef= (*it1)->getPosy_defensa();
                 if((*it)->toque(xdef,ydef)){
+                    qreal xgota= xdef;
+                    qreal ygota= ydef;
                     scene->removeItem((*it));
                    (*it)->setPos(10000,10000);
                     scene->removeItem((*it1));
+                    (*it1)->setPos(xgota,ygota);
+                    (*it1)->setPixmap(QPixmap(":/Imagenes/splash.PNG").scaled(25,40));
+                    sound_bacteria->setMedia(QUrl("qrc:/Audios/novirus.mp3"));
+                    sound_bacteria->setVolume(390);
+                    sound_bacteria->play();
 
                 }
 
@@ -323,14 +342,20 @@ void Nivel_1::act_per(){
                 if((*it)->toque(player->x(),player->y())){
                     player->setVida(player->getVida()-10);
                     scene->removeItem((*it));
-                    (*it)->setPos(10000,10000);}
+                    (*it)->setPos(10000,10000);
+                    sound_tos->setMedia(QUrl(":/Audios/tos_2.mp3"));
+                    sound_tos->setVolume(90);
+                    sound_tos->play();}
                     act_barra();
                     for(;it1!=defensas.end();it1++){
                         qreal xdef= (*it1)->getPosx_defensa();
                         qreal ydef= (*it1)->getPosy_defensa();
                         if((*it)->toque(xdef,ydef)){
                             scene->removeItem((*it));
-                            (*it)->setPos(10000,10000);}
+                            (*it)->setPos(10000,10000);
+                            sound_bacteria->setMedia(QUrl("qrc:/Audios/novirus.mp3"));
+                            sound_bacteria->setVolume(390);
+                            sound_bacteria->play();}
                     }
                 }
             }
@@ -630,10 +655,13 @@ void Nivel_1::mousePressEvent(QMouseEvent *event)
     defensas.push_back( new antibacterias);
     antibacterias* defensa = defensas.back();
     defensa->setnivel(*this);
+    //reproducir efecto
+    sound_antibacterial->setMedia(QUrl("qrc:/Audios/defensas.wav"));
+    sound_antibacterial->setVolume(390);
+    sound_antibacterial->play();
     float x1 = player->x()+(cos(rotationdeg*3.1416/180)) + 15;
     float y1 = player->y()+(sin(rotationdeg*3.1416/180)) + 27;
     defensa->setPos(x1, y1);
-
     defensa->direcciones(x1, y1,(sin(rotationdeg*3.1416/180))*300,(-cos(rotationdeg*3.1416/180))*300);
 
     defensa->setRotation(rotationdeg);
