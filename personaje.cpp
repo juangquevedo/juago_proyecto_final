@@ -87,11 +87,11 @@ void personaje::incrementardefensa()
 {
     numdefen++;
 }
-void personaje::rotacion(int x, int y)
+void personaje::rotacion(qreal x, qreal y)
 {
    setTransformOriginPoint(20, 20);
    qreal deg = atan2(y, x)*180/3.14159;
-   setRotation(deg+90);
+   //setRotation(deg+90);
     rotaciondeg = deg+90;
 }
 int personaje::getVida(){
@@ -100,4 +100,10 @@ int personaje::getVida(){
 void personaje::parar(){
     Ax=0;
     Ay=0;
+}
+
+qreal personaje::getRotation()
+{
+return rotaciondeg;
+
 }

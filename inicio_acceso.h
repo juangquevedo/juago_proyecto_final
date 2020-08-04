@@ -43,7 +43,7 @@ void on_inicio_clicked();
 
 private:
     Ui::inicio_acceso *ui;
-   // a_jugar *a_jugar1;
+    // a_jugar *a_jugar1;
 
 };
 #endif // INICIO_ACCESO_H

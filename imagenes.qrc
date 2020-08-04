@@ -12,8 +12,6 @@
         <file>Imagenes/barra 80%.png</file>
         <file>Imagenes/barra 90%.png</file>
         <file>Imagenes/barra 100%.png</file>
-        <file>Imagenes/icono_nivel_1.png</file>
-        <file>Imagenes/icono_nivel_3.png</file>
         <file>Imagenes/skin_1.png</file>
         <file>Imagenes/skin_2.png</file>
         <file>Imagenes/skin_3.png</file>
@@ -21,6 +19,10 @@
         <file>Imagenes/mapa edificio.png</file>
         <file>Imagenes/mapa pokemon.jpg</file>
         <file>Imagenes/ajugarfondo.PNG</file>
-        <file>Imagenes/mapa pokemon noche.jpg</file>
+        <file>Imagenes/mapa pokemon noche.png</file>
+        <file>Imagenes/inicio/aviso (1).png</file>
+        <file>Imagenes/inicio/aviso (2).png</file>
+        <file>Imagenes/WhatsApp Image 2020-08-03 at 7.09.33 PM.jpeg</file>
+        <file>Imagenes/WhatsApp Image 2020-08-03 at 7.18.14 PM.jpeg</file>
     </qresource>
 </RCC>

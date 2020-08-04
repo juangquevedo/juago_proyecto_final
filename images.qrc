@@ -6,11 +6,9 @@
         <file>Imagenes/inicio/punto2.PNG</file>
         <file>Imagenes/inicio/punto3.PNG</file>
         <file>Imagenes/inicio/punto4.PNG</file>
-        <file>Imagenes/defensa.PNG</file>
         <file>Imagenes/splash.PNG</file>
         <file>Imagenes/inicio/PANDEMIA.PNG</file>
         <file>Imagenes/inicio/ayuda.PNG</file>
-        <file>Imagenes/inicio/helpj.PNG</file>
-        <file>Imagenes/inicio/startjuego.PNG</file>
+        <file>Imagenes/gotacajatransparente.png</file>
     </qresource>
 </RCC>

@@ -7,8 +7,8 @@
 #include <QMediaPlayer>
 #include <math.h>
 #include "enemigos.h"
-#include "nivel_1.h"
-
+using namespace std;
+class Nivel_1;
 class antibacterias: public QObject, public QGraphicsPixmapItem
 {    Q_OBJECT
 public:
@@ -16,19 +16,21 @@ public:
     antibacterias(QGraphicsItem* parent= nullptr);
     ~antibacterias();
      //Metodos publicos
-//     void direcciones(float x, float y, float velx, float vely);
-//     void colisiones();
-
+     void setnivel(Nivel_1& n1);
+     void direcciones(float x, float y, float velx, float vely);
+     float getPosx_defensa();
+     float getPosy_defensa();
      //Atributos publicos
      QTimer* timer;
-//public slots:
-//     void moveBullet();
-// private:
-//     Nivel_1 *nivel1;
-//     float sx;
-//     float sy;
-//     float vy;
-//     float vx;
+public slots:
+     void moveBullet();
+ private:
+     Nivel_1* nivel1;
+     QMediaPlayer* soundeffects;
+     float sx;
+     float sy;
+     float vy;
+     float vx;
 };
 
 #endif // ANTIBACTERIAS_H

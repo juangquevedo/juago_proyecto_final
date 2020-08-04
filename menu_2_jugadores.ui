@@ -342,7 +342,7 @@ background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
        <item>
         <widget class="QLabel" name="label_3">
          <property name="styleSheet">
-          <string notr="true">background-image: url(:/Imagenes/icono_nivel_3.png);</string>
+          <string notr="true">background-image: url(:/Imagenes/mapa pokemon noche.png);</string>
          </property>
          <property name="text">
           <string/>
@@ -370,6 +370,22 @@ background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>30</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/Imagenes/inicio/ayuda.PNG);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -377,7 +393,7 @@ background-image: url(:/Imagenes/ajugarfondo.PNG);</string>
      <x>0</x>
      <y>0</y>
      <width>1136</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

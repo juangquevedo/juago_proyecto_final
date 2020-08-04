@@ -38,6 +38,8 @@ private slots:
 
     void on_bot_nil_3_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::menu_2_jugadores *ui;
     //carga de los niveles

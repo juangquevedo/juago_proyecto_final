@@ -13,7 +13,7 @@
 #include <QMessageBox>
 #include <sstream>
 #include "nivel_1.h"
-#include "menucargar.h"
+
 using namespace std;
 namespace Ui {
 class a_jugar;
@@ -44,8 +44,7 @@ private:
     Ui::a_jugar *ui;
     Menu* menu1;
     menu_2_jugadores* menu2;
-    menucargar *menucarga;
-
+    Nivel_1 *level1;
 };
 
 #endif // A_JUGAR_H

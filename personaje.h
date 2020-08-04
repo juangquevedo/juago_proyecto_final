@@ -21,7 +21,7 @@ public:
     int getVida();        //Retornar vida
     void parar();         //Pausar el personaje
     void incrementardefensa();
-    void rotacion(int x, int y);
+    void rotacion(qreal x, qreal y);
     qreal getRotation();
 
 private:
