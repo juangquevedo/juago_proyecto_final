@@ -97,6 +97,9 @@ private:
     bool dead=0;
     QString nombre;
     int numEnemigos;
+    QMediaPlayer* sound_antibacterial;
+    QMediaPlayer* sound_bacteria;
+    QMediaPlayer* sound_tos;
 
 };
 

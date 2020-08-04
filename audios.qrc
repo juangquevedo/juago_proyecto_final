@@ -1,9 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>Audios/background-suspense-music-suspenseful-dramatic-film-soundtracks-anticipation.mp3</file>
-        <file>Audios/death-sound-in-minecraft.mp3</file>
         <file>Audios/y2mate.com - CANCION DEL CORONAVIRUS (COVID-19)_p_mORIo7Aks.mp3</file>
-        <file>Audios/y2mate.com - Water Splash - Sound Effect_385dsklaW2A.mp3</file>
         <file>Audios/coronavirus.mpeg</file>
+        <file>Audios/defensas.wav</file>
+        <file>Audios/novirus.mp3</file>
+        <file>Audios/tos.mp3</file>
+        <file>Audios/tos_2.mp3</file>
     </qresource>
 </RCC>
